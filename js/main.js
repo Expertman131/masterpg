@@ -865,133 +865,53 @@ document.addEventListener('DOMContentLoaded', function() {
         // Базовые настройки анимации портфолио
         const portfolioSection = document.querySelector('.portfolio');
         const portfolioCards = document.querySelectorAll('.portfolio-card');
-        const portfolioGrid = document.querySelector('.portfolio-grid');
         
-        if (portfolioCards.length > 0 && portfolioSection && portfolioGrid) {
-            // Настраиваем контейнер для sticky-эффекта
-            portfolioSection.style.height = `${(portfolioCards.length * 60) + 100}vh`;
-            portfolioGrid.style.height = '100%';
+        if (portfolioCards.length > 0 && portfolioSection) {
+            // Добавляем класс-обертку для GSAP
+            portfolioSection.classList.add('shipping-tool-wrapper');
             
-            // Создаем навигационные точки
-            const navigation = document.createElement('div');
-            navigation.className = 'portfolio-navigation';
-            portfolioSection.appendChild(navigation);
-            
-            // Добавляем точки навигации для каждой карточки
-            portfolioCards.forEach((card, index) => {
-                const dot = document.createElement('div');
-                dot.className = 'portfolio-nav-dot';
-                dot.dataset.index = index;
-                navigation.appendChild(dot);
+            // Создаем timeline для анимации
+            const tl = gsap.timeline({
+                scrollTrigger: {
+                    trigger: ".shipping-tool-wrapper",
+                    start: "top 100",
+                    end: "bottom bottom",
+                    scrub: 1,
+                    ease: "linear",
+                },
             });
             
-            // Настраиваем ScrollTrigger для каждой карточки
+            // Применяем sticky эффект к каждой карточке
             portfolioCards.forEach((card, index) => {
+                // Добавляем дополнительный класс для стилизации
+                card.classList.add('shipping-tool-card');
+                
                 gsap.to(card, {
+                    position: "sticky",
+                    ease: "power2.inOut",
+                    top: `${18 + index * 52}px`,
+                    padding: "20px 40px 40px",
                     scrollTrigger: {
-                        trigger: portfolioSection,
-                        start: `top top`,
-                        end: `bottom bottom`,
-                        scrub: 1,
-                        pin: true,
-                        pinSpacing: false,
-                        markers: false,
-                        onUpdate: (self) => {
-                            // Обновляем активную точку в зависимости от позиции скролла
-                            const progress = self.progress * (portfolioCards.length);
-                            const activeIndex = Math.floor(progress);
-                            
-                            document.querySelectorAll('.portfolio-nav-dot').forEach((dot, i) => {
-                                if (i === activeIndex) {
-                                    dot.classList.add('active');
-                                } else {
-                                    dot.classList.remove('active');
-                                }
-                            });
-                            
-                            // Делаем активной только ту карточку, которая соответствует текущей позиции
-                            portfolioCards.forEach((c, i) => {
-                                if (i === activeIndex) {
-                                    gsap.to(c, {
-                                        scale: 1, 
-                                        opacity: 1, 
-                                        filter: 'blur(0px)',
-                                        zIndex: portfolioCards.length - i,
-                                        duration: 0.5
-                                    });
-                                    // Анимируем контент карточки
-                                    const cardContent = c.querySelector('.portfolio-card-content');
-                                    if (cardContent) {
-                                        gsap.to(cardContent, {
-                                            opacity: 1,
-                                            y: 0,
-                                            duration: 0.5,
-                                            delay: 0.1
-                                        });
-                                    }
-                                } else {
-                                    gsap.to(c, {
-                                        scale: 0.9, 
-                                        opacity: 0.5, 
-                                        filter: 'blur(5px)',
-                                        zIndex: 0,
-                                        duration: 0.5
-                                    });
-                                    // Скрываем контент неактивных карточек
-                                    const cardContent = c.querySelector('.portfolio-card-content');
-                                    if (cardContent) {
-                                        gsap.to(cardContent, {
-                                            opacity: 0,
-                                            y: 20,
-                                            duration: 0.3
-                                        });
-                                    }
-                                }
-                            });
-                        }
-                    }
+                        trigger: card,
+                        start: "top center",
+                        end: "bottom 300",
+                        scrub: true,
+                    },
                 });
                 
-                // Устанавливаем начальное состояние для каждой карточки
-                gsap.set(card, {
-                    opacity: index === 0 ? 1 : 0.5,
-                    scale: index === 0 ? 1 : 0.9,
-                    zIndex: index === 0 ? portfolioCards.length : 0,
-                    filter: index === 0 ? 'blur(0px)' : 'blur(5px)',
-                    position: 'absolute',
-                    top: '50%',
-                    left: '50%',
-                    xPercent: -50,
-                    yPercent: -50
-                });
-                
-                // Устанавливаем начальное состояние для контента карточки
-                const cardContent = card.querySelector('.portfolio-card-content');
-                if (cardContent) {
-                    gsap.set(cardContent, {
-                        opacity: index === 0 ? 1 : 0,
-                        y: index === 0 ? 0 : 20
-                    });
+                // Добавляем css-класс для заголовка, который будем анимировать
+                const cardTitle = card.querySelector('h3');
+                if (cardTitle) {
+                    cardTitle.classList.add('card-title-sm');
                 }
             });
             
-            // Устанавливаем первую точку как активную
-            const navDots = document.querySelectorAll('.portfolio-nav-dot');
-            if (navDots.length > 0) {
-                navDots[0].classList.add('active');
-            }
-            
-            // Добавляем обработчики клика на точки навигации
-            navDots.forEach((dot, index) => {
-                dot.addEventListener('click', () => {
-                    if (portfolioSection) {
-                        const scrollPosition = portfolioSection.offsetTop + (index * (portfolioSection.offsetHeight / portfolioCards.length));
-                        window.scrollTo({
-                            top: scrollPosition,
-                            behavior: 'smooth'
-                        });
-                    }
-                });
+            // Анимируем заголовки карточек
+            tl.to(".card-title-sm", {
+                opacity: (index) => 1 + index * 1, 
+                duration: 1,
+                ease: "power2.inOut",
+                delay: (index) => 1 + index * 1,
             });
         }
     } else {
