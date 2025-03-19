@@ -1401,43 +1401,28 @@ h3 {
     padding: 40px 20px;
     margin: 60px auto;
     max-width: 1200px;
-    height: 200vh; /* Добавляем больше пространства для скролл-эффекта */
+    min-height: 150vh; /* Добавляем пространство для эффекта */
 }
 
 .portfolio-card {
     position: relative;
     background: #FFFFFF;
     border-radius: 20px;
-    padding: 0;
+    padding: 40px;
     width: 100%;
     max-width: 900px;
     overflow: hidden;
     display: flex;
     flex-direction: column;
-    box-shadow: 0 10px 30px rgba(151, 71, 255, 0.05);
-    transition: all 0.5s ease-out;
+    box-shadow: 0 10px 20px rgba(151, 71, 255, 0.08);
+    transition: all 0.5s ease;
     transform-origin: center;
-    will-change: transform, opacity, filter, box-shadow;
-    z-index: calc(100 - var(--i, 0)); /* Используем CSS-переменную для z-index */
-    margin-bottom: 30px; /* Добавляем отступ между карточками */
-}
-
-.shipping-tool-card {
-    max-width: 1000px;
-    margin: 0 auto;
-    background: white;
-    border-radius: 20px;
-    box-shadow: 0 5px 20px rgba(151, 71, 255, 0.1);
-    transform-origin: top center;
-    transition: box-shadow 0.3s ease;
-}
-
-.shipping-tool-card:hover {
-    box-shadow: 0 10px 30px rgba(151, 71, 255, 0.2);
+    margin: 0 auto 30px;
+    z-index: calc(10 - var(--i, 0));
 }
 
 .portfolio-card:hover {
-    box-shadow: 0 15px 40px rgba(151, 71, 255, 0.15);
+    box-shadow: 0 15px 30px rgba(151, 71, 255, 0.15);
 }
 
 .portfolio-card-image {
@@ -1452,8 +1437,7 @@ h3 {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    transform: scale(1);
-    transition: transform 0.6s cubic-bezier(0.33, 1, 0.68, 1);
+    transition: transform 0.5s ease;
 }
 
 .portfolio-card:hover .portfolio-card-image img {
@@ -1465,13 +1449,6 @@ h3 {
     display: flex;
     flex-direction: column;
     flex-grow: 1;
-    position: relative;
-}
-
-.card-title-sm {
-    opacity: 0;
-    transform: translateY(20px);
-    transition: opacity 0.5s ease, transform 0.5s ease;
 }
 
 .portfolio-card-date {
@@ -1479,19 +1456,7 @@ h3 {
     font-size: 14px;
     color: #9747FF;
     font-weight: 500;
-    margin-bottom: 10px;
-    position: relative;
-    padding-left: 20px;
-}
-
-.portfolio-card-date::before {
-    content: "";
-    position: absolute;
-    left: 0;
-    top: 50%;
-    width: 12px;
-    height: 1px;
-    background-color: #9747FF;
+    margin-bottom: 16px;
 }
 
 .portfolio-card-content h3 {
@@ -1499,6 +1464,7 @@ h3 {
     font-weight: 700;
     margin-bottom: 20px;
     color: #000000;
+    opacity: 0; /* Начальное состояние для анимации */
 }
 
 .portfolio-card-content p {
@@ -1533,8 +1499,8 @@ h3 {
 .portfolio-actions {
     text-align: center;
     margin-top: 60px;
-    position: relative;
-    z-index: 200; /* Поднимаем кнопку над карточками */
+    position: relative; 
+    z-index: 100;
 }
 
 @media (max-width: 1024px) {

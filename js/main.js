@@ -862,56 +862,56 @@ document.addEventListener('DOMContentLoaded', function() {
     if (typeof gsap !== 'undefined' && typeof ScrollTrigger !== 'undefined') {
         gsap.registerPlugin(ScrollTrigger);
         
-        // Базовые настройки анимации портфолио
+        // Очищаем предыдущие анимации, если они есть
+        ScrollTrigger.getAll().forEach(st => st.kill());
+        gsap.globalTimeline.clear();
+        
+        // Получаем карточки портфолио
         const portfolioSection = document.querySelector('.portfolio');
         const portfolioCards = document.querySelectorAll('.portfolio-card');
         
         if (portfolioCards.length > 0 && portfolioSection) {
-            // Добавляем класс-обертку для GSAP
-            portfolioSection.classList.add('shipping-tool-wrapper');
+            // Устанавливаем больше места для прокрутки
+            const portfolioGrid = document.querySelector('.portfolio-grid');
+            if (portfolioGrid) {
+                portfolioGrid.style.height = `${portfolioCards.length * 100 + 300}px`;
+            }
             
-            // Создаем timeline для анимации
+            // Таймлайн для анимации заголовков
             const tl = gsap.timeline({
                 scrollTrigger: {
-                    trigger: ".shipping-tool-wrapper",
+                    trigger: ".portfolio",
                     start: "top 100",
                     end: "bottom bottom",
                     scrub: 1,
                     ease: "linear",
-                },
+                }
             });
             
-            // Применяем sticky эффект к каждой карточке
+            // Применяем анимацию к каждой карточке
             portfolioCards.forEach((card, index) => {
-                // Добавляем дополнительный класс для стилизации
-                card.classList.add('shipping-tool-card');
-                
                 gsap.to(card, {
                     position: "sticky",
                     ease: "power2.inOut",
                     top: `${18 + index * 52}px`,
-                    padding: "20px 40px 40px",
                     scrollTrigger: {
                         trigger: card,
                         start: "top center",
                         end: "bottom 300",
                         scrub: true,
-                    },
+                    }
                 });
                 
-                // Добавляем css-класс для заголовка, который будем анимировать
+                // Анимируем заголовки
                 const cardTitle = card.querySelector('h3');
                 if (cardTitle) {
-                    cardTitle.classList.add('card-title-sm');
+                    tl.to(cardTitle, {
+                        opacity: 1,
+                        duration: 0.5,
+                        ease: "power2.inOut",
+                        delay: index * 0.1
+                    }, index * 0.2);
                 }
-            });
-            
-            // Анимируем заголовки карточек
-            tl.to(".card-title-sm", {
-                opacity: (index) => 1 + index * 1, 
-                duration: 1,
-                ease: "power2.inOut",
-                delay: (index) => 1 + index * 1,
             });
         }
     } else {
