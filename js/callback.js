@@ -1,55 +1,45 @@
-export async function handleCallbackForm(e) {
-    e.preventDefault();
+import { supabase } from './supabase.js';
+
+export async function handleCallbackForm(event) {
+    event.preventDefault();
     
-    const form = e.target;
-    const submitButton = form.querySelector('button[type="submit"]');
-    
-    submitButton.disabled = true;
-    submitButton.textContent = 'Отправка...';
+    const form = event.target;
+    const name = form.querySelector('input[name="name"]').value;
+    const phone = form.querySelector('input[name="phone"]').value;
     
     try {
-        // Вместо отправки в Supabase, используем стандартный fetch для отправки на сервер
-        const formData = new FormData(form);
+        const { data, error } = await supabase
+            .from('callbacks')
+            .insert([
+                { 
+                    name,
+                    phone,
+                    created_at: new Date().toISOString()
+                }
+            ]);
+            
+        if (error) throw error;
         
-        const response = await fetch('server.php', {
-            method: 'POST',
-            body: formData
-        });
-        
-        if (!response.ok) {
-            throw new Error('Ошибка при отправке данных');
-        }
-        
-        // Показываем сообщение об успешной отправке
-        await Swal.fire({
-            title: 'Успешно!',
-            text: 'Ваша заявка принята. Мы свяжемся с вами в ближайшее время.',
+        // Показываем уведомление об успехе
+        Swal.fire({
+            title: 'Спасибо!',
+            text: 'Мы свяжемся с вами в ближайшее время',
             icon: 'success',
-            confirmButtonText: 'Понятно',
-            confirmButtonColor: '#9747FF'
+            confirmButtonText: 'OK'
         });
         
-        // Очищаем форму и закрываем модальное окно
+        // Очищаем форму
         form.reset();
-        const modal = document.getElementById('callback-modal');
-        if (modal) {
-            modal.classList.remove('active');
-            document.body.style.overflow = '';
-        }
-    } catch (error) {
-        console.error('Ошибка отправки:', error);
         
-        // Показываем сообщение об ошибке
-        await Swal.fire({
+    } catch (error) {
+        console.error('Error:', error.message);
+        
+        // Показываем уведомление об ошибке
+        Swal.fire({
             title: 'Ошибка!',
-            text: 'Произошла ошибка при отправке. Пожалуйста, попробуйте позже.',
+            text: 'Произошла ошибка при отправке формы. Пожалуйста, попробуйте позже.',
             icon: 'error',
-            confirmButtonText: 'Закрыть',
-            confirmButtonColor: '#9747FF'
+            confirmButtonText: 'OK'
         });
-    } finally {
-        // Возвращаем кнопке нормальное состояние
-        submitButton.disabled = false;
-        submitButton.textContent = 'Отправить заявку';
     }
 } 

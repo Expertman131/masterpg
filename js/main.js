@@ -5,92 +5,82 @@ document.addEventListener('DOMContentLoaded', function() {
     let requestId;
     let lastScrollTop = window.pageYOffset || document.documentElement.scrollTop;
     
-    // Проверяем наличие элементов перед добавлением обработчиков
-    if (decorElement && servicesSection) {
-        window.addEventListener('scroll', function() {
-            // Анимация для services-decor
-            if (requestId) {
-                cancelAnimationFrame(requestId);
-            }
-            
-            requestId = requestAnimationFrame(function() {
-                const rect = servicesSection.getBoundingClientRect();
-                const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-                const scrollDirection = scrollTop > lastScrollTop ? 1 : -1;
-                
-                const viewportHeight = window.innerHeight;
-                const elementTop = rect.top;
-                const elementHeight = rect.height;
-                
-                const startOffset = viewportHeight * 0.5;
-                const totalDistance = viewportHeight + elementHeight;
-                
-                let progress = (startOffset - elementTop) / totalDistance;
-                progress = Math.min(Math.max(progress, 0), 1);
-                
-                const translateX = -600 * progress;
-                const inertiaFactor = 0.1;
-                const smoothTranslateX = translateX + (scrollDirection * inertiaFactor * Math.abs(scrollTop - lastScrollTop));
-                
-                decorElement.style.setProperty('--tx', `${smoothTranslateX}px`);
-            });
-        });
-    }
-
     // Элементы для why-us-decor
     const whyUsDecorElement = document.querySelector('.why-us-decor');
     const whyUsSection = document.querySelector('.why-us');
     let whyUsRequestId;
     
-    // Проверяем наличие элементов перед добавлением обработчиков
-    if (whyUsDecorElement && whyUsSection) {
-        window.addEventListener('scroll', function() {
-            // Анимация для why-us-decor
-            if (whyUsRequestId) {
-                cancelAnimationFrame(whyUsRequestId);
-            }
+    window.addEventListener('scroll', function() {
+        // Анимация для services-decor
+        if (requestId) {
+            cancelAnimationFrame(requestId);
+        }
+        
+        requestId = requestAnimationFrame(function() {
+            const rect = servicesSection.getBoundingClientRect();
+            const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+            const scrollDirection = scrollTop > lastScrollTop ? 1 : -1;
             
-            whyUsRequestId = requestAnimationFrame(function() {
-                const rect = whyUsSection.getBoundingClientRect();
-                const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-                const scrollDirection = scrollTop > lastScrollTop ? 1 : -1;
-                
-                const viewportHeight = window.innerHeight;
-                const elementTop = rect.top;
-                const elementHeight = rect.height;
-                
-                const startOffset = viewportHeight * 0.5;
-                const totalDistance = viewportHeight + elementHeight;
-                
-                let progress = (startOffset - elementTop) / totalDistance;
-                progress = Math.min(Math.max(progress, 0), 1);
-                
-                const translateX = -600 * progress;
-                const inertiaFactor = 0.1;
-                const smoothTranslateX = translateX + (scrollDirection * inertiaFactor * Math.abs(scrollTop - lastScrollTop));
-                
-                whyUsDecorElement.style.setProperty('--tx-why', `${smoothTranslateX}px`);
-                lastScrollTop = scrollTop;
-            });
+            const viewportHeight = window.innerHeight;
+            const elementTop = rect.top;
+            const elementHeight = rect.height;
+            
+            const startOffset = viewportHeight * 0.5;
+            const totalDistance = viewportHeight + elementHeight;
+            
+            let progress = (startOffset - elementTop) / totalDistance;
+            progress = Math.min(Math.max(progress, 0), 1);
+            
+            const translateX = -600 * progress;
+            const inertiaFactor = 0.1;
+            const smoothTranslateX = translateX + (scrollDirection * inertiaFactor * Math.abs(scrollTop - lastScrollTop));
+            
+            decorElement.style.setProperty('--tx', `${smoothTranslateX}px`);
         });
-    }
+
+        // Анимация для why-us-decor
+        if (whyUsRequestId) {
+            cancelAnimationFrame(whyUsRequestId);
+        }
+        
+        whyUsRequestId = requestAnimationFrame(function() {
+            const rect = whyUsSection.getBoundingClientRect();
+            const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+            const scrollDirection = scrollTop > lastScrollTop ? 1 : -1;
+            
+            const viewportHeight = window.innerHeight;
+            const elementTop = rect.top;
+            const elementHeight = rect.height;
+            
+            const startOffset = viewportHeight * 0.5;
+            const totalDistance = viewportHeight + elementHeight;
+            
+            let progress = (startOffset - elementTop) / totalDistance;
+            progress = Math.min(Math.max(progress, 0), 1);
+            
+            const translateX = -600 * progress;
+            const inertiaFactor = 0.1;
+            const smoothTranslateX = translateX + (scrollDirection * inertiaFactor * Math.abs(scrollTop - lastScrollTop));
+            
+            whyUsDecorElement.style.setProperty('--tx-why', `${smoothTranslateX}px`);
+            lastScrollTop = scrollTop;
+        });
+    });
 });
 
 // Настройки для плавной прокрутки
-if (typeof SmoothScroll === 'function') {
-    SmoothScroll({
-        animationTime    : 800,
-        stepSize         : 85,
-        accelerationDelta : 20,  
-        accelerationMax   : 1.5,   
-        keyboardSupport   : true,  
-        arrowScroll       : 50,
-        pulseAlgorithm   : true,
-        pulseScale       : 4,
-        pulseNormalize   : 1,
-        touchpadSupport   : true,
-    });
-}
+SmoothScroll({
+    animationTime    : 800,
+    stepSize         : 85,
+    accelerationDelta : 20,  
+    accelerationMax   : 1.5,   
+    keyboardSupport   : true,  
+    arrowScroll       : 50,
+    pulseAlgorithm   : true,
+    pulseScale       : 4,
+    pulseNormalize   : 1,
+    touchpadSupport   : true,
+});
 
 // Анимация для types-image
 document.addEventListener('DOMContentLoaded', function() {
@@ -101,56 +91,53 @@ document.addEventListener('DOMContentLoaded', function() {
     let requestId;
     let lastScrollTop = window.pageYOffset || document.documentElement.scrollTop;
     
-    // Проверяем наличие всех необходимых элементов
-    if (typesImageElement && typesDecorElement && typesSection && typesContent) {
-        function calculateMaxTranslation() {
-            const contentHeight = typesContent.offsetHeight;
-            const imageHeight = typesImageElement.offsetHeight;
-            return contentHeight - imageHeight;
-        }
+    function calculateMaxTranslation() {
+        const contentHeight = typesContent.offsetHeight;
+        const imageHeight = typesImageElement.offsetHeight;
+        return contentHeight - imageHeight;
+    }
 
-        function calculateScrollProgress() {
-            const rect = typesSection.getBoundingClientRect();
-            const viewportHeight = window.innerHeight;
-            const elementTop = rect.top;
-            const elementHeight = rect.height;
-            const startOffset = viewportHeight * 0.5;
-            const totalDistance = viewportHeight + elementHeight;
-            let progress = (startOffset - elementTop) / totalDistance;
-            return Math.min(Math.max(progress, 0), 1);
+    function calculateScrollProgress() {
+        const rect = typesSection.getBoundingClientRect();
+        const viewportHeight = window.innerHeight;
+        const elementTop = rect.top;
+        const elementHeight = rect.height;
+        const startOffset = viewportHeight * 0.5;
+        const totalDistance = viewportHeight + elementHeight;
+        let progress = (startOffset - elementTop) / totalDistance;
+        return Math.min(Math.max(progress, 0), 1);
+    }
+    
+    window.addEventListener('scroll', function() {
+        if (requestId) {
+            cancelAnimationFrame(requestId);
         }
         
-        window.addEventListener('scroll', function() {
-            if (requestId) {
-                cancelAnimationFrame(requestId);
-            }
-            
-            requestId = requestAnimationFrame(function() {
-                const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-                const scrollDirection = scrollTop > lastScrollTop ? 1 : -1;
-                const progress = calculateScrollProgress();
-                
-                const maxTranslation = calculateMaxTranslation();
-                const translateY = maxTranslation * progress;
-                const inertiaFactor = 0.1;
-                const smoothTranslateY = translateY + (scrollDirection * inertiaFactor * Math.abs(scrollTop - lastScrollTop));
-                typesImageElement.style.setProperty('--ty', `${smoothTranslateY}px`);
-
-                const translateYDecor = -120 * progress;
-                const smoothTranslateYDecor = translateYDecor + (scrollDirection * inertiaFactor * Math.abs(scrollTop - lastScrollTop));
-                typesDecorElement.style.setProperty('--ty-decor', `${smoothTranslateYDecor}px`);
-                
-                lastScrollTop = scrollTop;
-            });
-        });
-
-        window.addEventListener('resize', function() {
-            const maxTranslation = calculateMaxTranslation();
+        requestId = requestAnimationFrame(function() {
+            const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+            const scrollDirection = scrollTop > lastScrollTop ? 1 : -1;
             const progress = calculateScrollProgress();
+            
+            const maxTranslation = calculateMaxTranslation();
             const translateY = maxTranslation * progress;
-            typesImageElement.style.setProperty('--ty', `${translateY}px`);
+            const inertiaFactor = 0.1;
+            const smoothTranslateY = translateY + (scrollDirection * inertiaFactor * Math.abs(scrollTop - lastScrollTop));
+            typesImageElement.style.setProperty('--ty', `${smoothTranslateY}px`);
+
+            const translateYDecor = -120 * progress;
+            const smoothTranslateYDecor = translateYDecor + (scrollDirection * inertiaFactor * Math.abs(scrollTop - lastScrollTop));
+            typesDecorElement.style.setProperty('--ty-decor', `${smoothTranslateYDecor}px`);
+            
+            lastScrollTop = scrollTop;
         });
-    }
+    });
+
+    window.addEventListener('resize', function() {
+        const maxTranslation = calculateMaxTranslation();
+        const progress = calculateScrollProgress();
+        const translateY = maxTranslation * progress;
+        typesImageElement.style.setProperty('--ty', `${translateY}px`);
+    });
 });
 
 // Модальное окно
@@ -667,42 +654,28 @@ function handleHeaderVisibility() {
 // Инициализация функций при загрузке страницы
 document.addEventListener('DOMContentLoaded', function() {
     // Инициализация Vue для портфолио
-    const appElement = document.getElementById('app');
-    if (appElement) {
-        new Vue({
-            el: '#app',
-            data: {
-                showHidden: false
-            },
-            methods: {
-                toggleHidden: function() {
-                    this.showHidden = !this.showHidden;
-                    const hiddenCards = document.querySelector('.hidden-cards');
-                    if (hiddenCards) {
-                        if (this.showHidden) {
-                            hiddenCards.classList.add('show');
-                            const showMoreBtn = document.querySelector('.show-more-btn');
-                            if (showMoreBtn) {
-                                showMoreBtn.textContent = 'Скрыть';
-                            }
-                        } else {
-                            hiddenCards.classList.remove('show');
-                            const showMoreBtn = document.querySelector('.show-more-btn');
-                            if (showMoreBtn) {
-                                showMoreBtn.textContent = 'Показать еще';
-                            }
-                        }
-                    }
-                }
-            },
-            mounted: function() {
-                const showMoreBtn = document.querySelector('.show-more-btn');
-                if (showMoreBtn) {
-                    showMoreBtn.addEventListener('click', this.toggleHidden);
+    new Vue({
+        el: '#app',
+        data: {
+            showHidden: false
+        },
+        methods: {
+            toggleHidden: function() {
+                this.showHidden = !this.showHidden;
+                const hiddenCards = document.querySelector('.hidden-cards');
+                if (this.showHidden) {
+                    hiddenCards.classList.add('show');
+                    document.querySelector('.show-more-btn').textContent = 'Скрыть';
+                } else {
+                    hiddenCards.classList.remove('show');
+                    document.querySelector('.show-more-btn').textContent = 'Показать еще';
                 }
             }
-        });
-    }
+        },
+        mounted: function() {
+            document.querySelector('.show-more-btn').addEventListener('click', this.toggleHidden);
+        }
+    });
 
     // Инициализация скрытия/показа шапки при скроле
     handleHeaderVisibility();
@@ -716,7 +689,7 @@ document.addEventListener('DOMContentLoaded', function() {
             
             const targetElement = document.querySelector(targetId);
             if (targetElement) {
-                const headerHeight = document.querySelector('.header')?.offsetHeight || 0;
+                const headerHeight = document.querySelector('.header').offsetHeight;
                 const targetPosition = targetElement.getBoundingClientRect().top + window.pageYOffset - headerHeight;
                 
                 window.scrollTo({
@@ -741,221 +714,115 @@ document.addEventListener('DOMContentLoaded', function() {
             const phone = formData.get('phone');
             
             // Пример отправки через EmailJS
-            if (typeof emailjs !== 'undefined') {
-                emailjs.send('service_id', 'template_id', {
-                    name: name,
-                    phone: phone
-                })
-                .then(function() {
-                    Swal.fire({
-                        title: 'Спасибо!',
-                        text: 'Мы перезвоним вам в ближайшее время',
-                        icon: 'success',
-                        customClass: {
-                            popup: 'swal-custom-popup',
-                            confirmButton: 'swal-custom-confirm'
-                        }
-                    });
-                    
-                    // Сброс формы
-                    form.reset();
-                    
-                    // Закрытие модального окна, если форма в модальном окне
-                    const modal = document.getElementById('callback-modal');
-                    if (modal && modal.classList.contains('active')) {
-                        modal.classList.remove('active');
+            emailjs.send('service_id', 'template_id', {
+                name: name,
+                phone: phone
+            })
+            .then(function() {
+                Swal.fire({
+                    title: 'Спасибо!',
+                    text: 'Мы перезвоним вам в ближайшее время',
+                    icon: 'success',
+                    customClass: {
+                        popup: 'swal-custom-popup',
+                        confirmButton: 'swal-custom-confirm'
                     }
-                })
-                .catch(function(error) {
-                    console.error('Ошибка отправки:', error);
-                    Swal.fire({
-                        title: 'Ошибка!',
-                        text: 'Не удалось отправить заявку. Пожалуйста, попробуйте позже.',
-                        icon: 'error',
-                        customClass: {
-                            popup: 'swal-custom-popup',
-                            confirmButton: 'swal-custom-confirm'
-                        }
-                    });
                 });
-            } else {
-                // Если EmailJS не доступен, используем обычный fetch
-                fetch('server.php', {
-                    method: 'POST',
-                    body: formData
-                })
-                .then(response => {
-                    if (!response.ok) {
-                        throw new Error('Ошибка отправки');
+                
+                // Сброс формы
+                form.reset();
+                
+                // Закрытие модального окна, если форма в модальном окне
+                const modal = document.getElementById('callback-modal');
+                if (modal && modal.classList.contains('active')) {
+                    modal.classList.remove('active');
+                }
+            })
+            .catch(function(error) {
+                console.error('Ошибка отправки:', error);
+                Swal.fire({
+                    title: 'Ошибка!',
+                    text: 'Не удалось отправить заявку. Пожалуйста, попробуйте позже.',
+                    icon: 'error',
+                    customClass: {
+                        popup: 'swal-custom-popup',
+                        confirmButton: 'swal-custom-confirm'
                     }
-                    return response.json();
-                })
-                .then(() => {
-                    Swal.fire({
-                        title: 'Спасибо!',
-                        text: 'Мы перезвоним вам в ближайшее время',
-                        icon: 'success',
-                        customClass: {
-                            popup: 'swal-custom-popup',
-                            confirmButton: 'swal-custom-confirm'
-                        }
-                    });
-                    
-                    // Сброс формы
-                    form.reset();
-                    
-                    // Закрытие модального окна, если форма в модальном окне
-                    const modal = document.getElementById('callback-modal');
-                    if (modal && modal.classList.contains('active')) {
-                        modal.classList.remove('active');
-                    }
-                })
-                .catch(error => {
-                    console.error('Ошибка отправки:', error);
-                    Swal.fire({
-                        title: 'Ошибка!',
-                        text: 'Не удалось отправить заявку. Пожалуйста, попробуйте позже.',
-                        icon: 'error',
-                        customClass: {
-                            popup: 'swal-custom-popup',
-                            confirmButton: 'swal-custom-confirm'
-                        }
-                    });
                 });
-            }
+            });
         });
     });
 
     // Открытие и закрытие модального окна
     const callbackButtons = document.querySelectorAll('.header-callback, a[href="#callback-modal"]');
     const modal = document.getElementById('callback-modal');
-    if (modal) {
-        const closeButton = modal.querySelector('.modal-close');
-        
-        callbackButtons.forEach(button => {
-            button.addEventListener('click', function(e) {
-                e.preventDefault();
-                modal.classList.add('active');
-                document.body.style.overflow = 'hidden';
-            });
-        });
-        
-        if (closeButton) {
-            closeButton.addEventListener('click', function() {
-                modal.classList.remove('active');
-                document.body.style.overflow = '';
-            });
-        }
-        
-        modal.addEventListener('click', function(e) {
-            if (e.target === modal) {
-                modal.classList.remove('active');
-                document.body.style.overflow = '';
-            }
-        });
-    }
-});
-
-// Вертикальное перелистывание портфолио с эффектом sticky-карточек
-document.addEventListener('DOMContentLoaded', function() {
-    // Проверяем, что GSAP и ScrollTrigger загружены
-    if (typeof gsap !== 'undefined' && typeof ScrollTrigger !== 'undefined') {
-        gsap.registerPlugin(ScrollTrigger);
-        
-        // Очищаем предыдущие анимации, если они есть
-        ScrollTrigger.getAll().forEach(st => st.kill());
-        gsap.globalTimeline.clear();
-        
-        // Получаем карточки портфолио
-        const portfolioSection = document.querySelector('.portfolio');
-        const portfolioCards = document.querySelectorAll('.portfolio-card');
-        
-        if (portfolioCards.length > 0 && portfolioSection) {
-            // Устанавливаем больше места для прокрутки
-            const portfolioGrid = document.querySelector('.portfolio-grid');
-            if (portfolioGrid) {
-                portfolioGrid.style.height = `${portfolioCards.length * 100 + 300}px`;
-            }
-            
-            // Таймлайн для анимации заголовков
-            const tl = gsap.timeline({
-                scrollTrigger: {
-                    trigger: ".portfolio",
-                    start: "top 100",
-                    end: "bottom bottom",
-                    scrub: 1,
-                    ease: "linear",
-                }
-            });
-            
-            // Применяем анимацию к каждой карточке
-            portfolioCards.forEach((card, index) => {
-                gsap.to(card, {
-                    position: "sticky",
-                    ease: "power2.inOut",
-                    top: `${18 + index * 52}px`,
-                    scrollTrigger: {
-                        trigger: card,
-                        start: "top center",
-                        end: "bottom 300",
-                        scrub: true,
-                    }
-                });
-                
-                // Анимируем заголовки
-                const cardTitle = card.querySelector('h3');
-                if (cardTitle) {
-                    tl.to(cardTitle, {
-                        opacity: 1,
-                        duration: 0.5,
-                        ease: "power2.inOut",
-                        delay: index * 0.1
-                    }, index * 0.2);
-                }
-            });
-        }
-    } else {
-        console.warn('GSAP или ScrollTrigger не загружены');
-    }
-});
-
-// Анимация декоративных элементов при скролле
-document.addEventListener('DOMContentLoaded', function() {
-    const decor2 = document.querySelector('.why-us .decor2');
-    const whyUsSection = document.querySelector('.why-us');
+    const closeButton = modal.querySelector('.modal-close');
     
-    // Проверка наличия элементов перед добавлением обработчиков
-    if (decor2 && whyUsSection) {
-        let requestId;
-        let lastScrollTop = window.pageYOffset || document.documentElement.scrollTop;
-
-        window.addEventListener('scroll', function() {
-            if (requestId) {
-                cancelAnimationFrame(requestId);
-            }
-            
-            requestId = requestAnimationFrame(function() {
-                const rect = whyUsSection.getBoundingClientRect();
-                const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-                const scrollDirection = scrollTop > lastScrollTop ? 1 : -1;
-                
-                const viewportHeight = window.innerHeight;
-                const elementTop = rect.top;
-                const elementHeight = rect.height;
-                
-                const startOffset = viewportHeight * 0.5;
-                const totalDistance = viewportHeight + elementHeight;
-                
-                let progress = (startOffset - elementTop) / totalDistance;
-                progress = Math.min(Math.max(progress, 0), 1);
-                
-                const translateX = 600 * progress;
-                const inertiaFactor = 0.1;
-                const smoothTranslateX = translateX + (scrollDirection * inertiaFactor * Math.abs(scrollTop - lastScrollTop));
-                
-                decor2.style.setProperty('--tx', `${smoothTranslateX}px`);
-                lastScrollTop = scrollTop;
-            });
+    callbackButtons.forEach(button => {
+        button.addEventListener('click', function(e) {
+            e.preventDefault();
+            modal.classList.add('active');
+            document.body.style.overflow = 'hidden';
         });
-    }
-}); 
+    });
+    
+    closeButton.addEventListener('click', function() {
+        modal.classList.remove('active');
+        document.body.style.overflow = '';
+    });
+    
+    modal.addEventListener('click', function(e) {
+        if (e.target === modal) {
+            modal.classList.remove('active');
+            document.body.style.overflow = '';
+        }
+    });
+});
+
+// Вертикальное перелистывание портфолио с GSAP
+gsap.registerPlugin(ScrollTrigger);
+
+const tl = gsap.timeline({
+  scrollTrigger: {
+    trigger: ".portfolio-grid",
+    start: "top 100",
+    end: "bottom bottom",
+    scrub: 1,
+    ease: "linear",
+  },
+});
+
+const cards = document.querySelectorAll(".portfolio-card");
+
+cards.forEach((card, index) => {
+  // const initialScale = 0.96;
+  // const decrement = 0.01;
+  // const scaleValue = initialScale + index * decrement;
+  // const isLastCard = index === cards.length - 1;
+  gsap.to(card, {
+    position: "sticky",
+    // duration: 1.5,
+    ease: "power2.inOut",
+    top: `${18 + index * 52}px`,
+    // transform: `scale(${scaleValue})`,
+    padding: "20px 40px 40px",
+    // duration: 1,
+    // delay: index * 0.5,
+    scrollTrigger: {
+      trigger: card,
+      start: "top center",
+      end: "bottom 300",
+      scrub: true,
+      // markers: true,
+    },
+  });
+});
+tl.to(".card-title-sm", {
+  opacity: (index) => 1 + index * 1, // Dynamic opacity: starts at 0.5, increments by 0.1
+  // display: "block",
+  duration: 1,
+  ease: "power2.inOut",
+  // stagger: (index) => index * 0.5,
+  // duration: index * 0.1,
+  delay: (index) => 1 + index * 1,
+});

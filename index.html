@@ -8,8 +8,11 @@
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
         <link rel="stylesheet" href="css/style.css">
+        <link rel="stylesheet" href="css/portfolio-card.css">
         <script type="module">
+            import { supabase } from './js/supabase.js';
             import { handleCallbackForm } from './js/callback.js';
+            window.supabase = supabase;
             
             // Инициализация обработчика формы
             document.getElementById('callback-form').addEventListener('submit', handleCallbackForm);
@@ -198,78 +201,84 @@
             <div class="container">
                 <h2 class="section-title">Наши работы</h2>
                 <p class="section-description subheader">Ознакомьтесь с нашими последними работами</p>
-            </div>
-            <div class="portfolio-grid">
-                <div class="portfolio-card" style="--i: 0;">
-                    <div class="portfolio-card-image">
-                        <img src="images/portf1.jpg" alt="Дезинфекция Насекомых">
-                    </div>
-                    <div class="portfolio-card-content">
-                        <div class="portfolio-card-date">Февраль 2024</div>
-                        <h3>Дезинфекция Насекомых</h3>
-                        <p>Сайт для компании по дезинфекции помещений. Современный дизайн и удобный функционал для заказа услуг онлайн.</p>
-                        <div class="portfolio-card-link">
-                            <span class="link-text">Перейти</span>
-                            <svg class="arrow-icon" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                <path d="M5 12H19M19 12L12 5M19 12L12 19" stroke="#9747FF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                            </svg>
+                <div class="portfolio-grid">
+                    <!-- Новая карточка из Figma -->
+                    <div class="portfolio-card-figma">
+                        <div class="portfolio-card-date-figma">Февраль 2024</div>
+                        <div class="portfolio-card-flex-figma">
+                            <div class="portfolio-card-image-figma">
+                                <img src="images/portfolio_card_image.jpg" alt="Дезинфекция Насекомых">
+                            </div>
+                            <div class="portfolio-card-content-figma">
+                                <h2 class="portfolio-card-title-figma">Дезинфекция<br>Насекомых</h2>
+                                <div class="portfolio-card-separator-figma"></div>
+                                <p class="portfolio-card-description-figma">Сайт для компании по дезинфекции помещений. Современный дизайн и удобный функционал для заказа услуг онлайн.</p>
+                                <div class="portfolio-card-link-figma">
+                                    <span class="portfolio-card-link-text-figma">Перейти</span>
+                                    <div class="portfolio-card-link-icon-figma">
+                                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                            <path d="M5 12H19M19 12L12 5M19 12L12 19" stroke="#A15BCD" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                        </svg>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
-                </div>
+                    
+                    <div class="portfolio-card">
+                        <div class="portfolio-card-image">
+                            <img src="images/portf2.jpg" alt="Правовая защита">
+                        </div>
+                        <div class="portfolio-card-content">
+                            <div class="portfolio-card-date">Январь 2024</div>
+                            <h3>Правовая защита</h3>
+                            <p>Корпоративный сайт юридической компании с каталогом услуг и онлайн-консультацией.</p>
+                            <div class="portfolio-card-link">
+                                <span class="link-text">Перейти</span>
+                                <svg class="arrow-icon" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                    <path d="M5 12H19M19 12L12 5M19 12L12 19" stroke="#9747FF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                </svg>
+                            </div>
+                        </div>
+                    </div>
 
-                <div class="portfolio-card" style="--i: 1;">
-                    <div class="portfolio-card-image">
-                        <img src="images/portf2.jpg" alt="Правовая защита">
-                    </div>
-                    <div class="portfolio-card-content">
-                        <div class="portfolio-card-date">Январь 2024</div>
-                        <h3>Правовая защита</h3>
-                        <p>Корпоративный сайт юридической компании с каталогом услуг и онлайн-консультацией.</p>
-                        <div class="portfolio-card-link">
-                            <span class="link-text">Перейти</span>
-                            <svg class="arrow-icon" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                <path d="M5 12H19M19 12L12 5M19 12L12 19" stroke="#9747FF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                            </svg>
+                    <div class="portfolio-card">
+                        <div class="portfolio-card-image">
+                            <img src="images/portf3.jpg" alt="Мазда-центр">
+                        </div>
+                        <div class="portfolio-card-content">
+                            <div class="portfolio-card-date">Декабрь 2023</div>
+                            <h3>Мазда-центр</h3>
+                            <p>Сайт официального дилера Mazda с каталогом автомобилей и онлайн-записью на тест-драйв.</p>
+                            <div class="portfolio-card-link">
+                                <span class="link-text">Перейти</span>
+                                <svg class="arrow-icon" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                    <path d="M5 12H19M19 12L12 5M19 12L12 19" stroke="#9747FF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                </svg>
+                            </div>
                         </div>
                     </div>
-                </div>
 
-                <div class="portfolio-card" style="--i: 2;">
-                    <div class="portfolio-card-image">
-                        <img src="images/portf3.jpg" alt="Мазда-центр">
-                    </div>
-                    <div class="portfolio-card-content">
-                        <div class="portfolio-card-date">Декабрь 2023</div>
-                        <h3>Мазда-центр</h3>
-                        <p>Сайт официального дилера Mazda с каталогом автомобилей и онлайн-записью на тест-драйв.</p>
-                        <div class="portfolio-card-link">
-                            <span class="link-text">Перейти</span>
-                            <svg class="arrow-icon" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                <path d="M5 12H19M19 12L12 5M19 12L12 19" stroke="#9747FF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                            </svg>
+                    <div class="portfolio-card">
+                        <div class="portfolio-card-image">
+                            <img src="images/portf4.jpg" alt="Рускухни">
+                        </div>
+                        <div class="portfolio-card-content">
+                            <div class="portfolio-card-date">Ноябрь 2023</div>
+                            <h3>Рускухни</h3>
+                            <p>Интернет-магазин кухонной мебели с конфигуратором и возможностью заказа замера онлайн.</p>
+                            <div class="portfolio-card-link">
+                                <span class="link-text">Перейти</span>
+                                <svg class="arrow-icon" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                    <path d="M5 12H19M19 12L12 5M19 12L12 19" stroke="#9747FF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                </svg>
+                            </div>
                         </div>
                     </div>
                 </div>
-
-                <div class="portfolio-card" style="--i: 3;">
-                    <div class="portfolio-card-image">
-                        <img src="images/portf4.jpg" alt="Рускухни">
-                    </div>
-                    <div class="portfolio-card-content">
-                        <div class="portfolio-card-date">Ноябрь 2023</div>
-                        <h3>Рускухни</h3>
-                        <p>Интернет-магазин кухонной мебели с конфигуратором и возможностью заказа замера онлайн.</p>
-                        <div class="portfolio-card-link">
-                            <span class="link-text">Перейти</span>
-                            <svg class="arrow-icon" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                <path d="M5 12H19M19 12L12 5M19 12L12 19" stroke="#9747FF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                            </svg>
-                        </div>
-                    </div>
+                <div class="portfolio-actions">
+                    <a href="portfolio.html" class="btn">Смотреть все работы</a>
                 </div>
-            </div>
-            <div class="portfolio-actions">
-                <a href="portfolio.html" class="btn">Смотреть все работы</a>
             </div>
         </section>
         <!-- Process Section -->

@@ -1,0 +1,11 @@
+{
+  "mcpServers": {
+    "Figma": {
+      "url": "http://localhost:3333/sse",
+      "messageUrl": "http://localhost:3333/messages",
+      "timeout": 30000,
+      "reconnect": true,
+      "reconnectInterval": 5000
+    }
+  }
+} 
