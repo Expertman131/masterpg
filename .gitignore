@@ -1,0 +1,41 @@
+# Игнорирование системных и временных файлов
+.DS_Store
+Thumbs.db
+desktop.ini
+.vscode/
+.idea/
+*.sublime-project
+*.sublime-workspace
+
+# Логи и временные файлы
+logs/
+*.log
+npm-debug.log*
+
+# Зависимости
+node_modules/
+vendor/
+
+# Сборки и дистрибутивы
+dist/
+build/
+*.zip
+*.rar
+*.7z
+*.tar
+*.gz
+
+# Резервные копии и кэш
+*~
+*.swp
+*.bak
+*.tmp
+.sass-cache/
+.tmp/
+
+# Конфигурационные файлы с чувствительными данными
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local 

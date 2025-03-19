@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quiz - Создание сайтов</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/quiz.css">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+</head>
+<body>
+    <div class="quiz-container">
+        <div class="quiz-header">
+            <h1>Какой сайт вам нужен?</h1>
+            <p>Ответьте на несколько вопросов, и мы подберем оптимальное решение для вашего бизнеса</p>
+        </div>
+
+        <form class="quiz-form" id="quizForm">
+            <!-- Вопрос 1 -->
+            <div class="question active">
+                <h2 class="question-title">Какой тип сайта вам нужен?</h2>
+                <div class="options-grid">
+                    <div class="option-card">
+                        <img src="images/landing-icon.svg" alt="Лендинг" class="option-icon">
+                        <h3 class="option-title">Лендинг</h3>
+                        <p class="option-description">Одностраничный сайт для продвижения конкретного товара или услуги</p>
+                        <input type="radio" name="question1" value="landing" required>
+                    </div>
+                    <div class="option-card">
+                        <img src="images/corporate-icon.svg" alt="Корпоративный сайт" class="option-icon">
+                        <h3 class="option-title">Корпоративный сайт</h3>
+                        <p class="option-description">Многостраничный сайт для представления компании и её услуг</p>
+                        <input type="radio" name="question1" value="corporate" required>
+                    </div>
+                    <div class="option-card">
+                        <img src="images/shop-icon.svg" alt="Интернет-магазин" class="option-icon">
+                        <h3 class="option-title">Интернет-магазин</h3>
+                        <p class="option-description">Сайт для продажи товаров с корзиной и системой оплаты</p>
+                        <input type="radio" name="question1" value="shop" required>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Вопрос 2 -->
+            <div class="question">
+                <h2 class="question-title">Какие функции должны быть на сайте?</h2>
+                <div class="options-grid">
+                    <div class="option-card">
+                        <img src="images/basic-icon.svg" alt="Базовые функции" class="option-icon">
+                        <h3 class="option-title">Базовые функции</h3>
+                        <p class="option-description">Главная страница, каталог, контакты</p>
+                        <input type="radio" name="question2" value="basic" required>
+                    </div>
+                    <div class="option-card">
+                        <img src="images/advanced-icon.svg" alt="Расширенные функции" class="option-icon">
+                        <h3 class="option-title">Расширенные функции</h3>
+                        <p class="option-description">Личный кабинет, онлайн-оплата, интеграция с CRM</p>
+                        <input type="radio" name="question2" value="advanced" required>
+                    </div>
+                    <div class="option-card">
+                        <img src="images/custom-icon.svg" alt="Индивидуальные функции" class="option-icon">
+                        <h3 class="option-title">Индивидуальные функции</h3>
+                        <p class="option-description">Специальные функции под ваши задачи</p>
+                        <input type="radio" name="question2" value="custom" required>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Вопрос 3 -->
+            <div class="question">
+                <h2 class="question-title">Какой бюджет вы готовы выделить?</h2>
+                <div class="options-grid">
+                    <div class="option-card">
+                        <img src="images/budget-icon.svg" alt="До 50 000 ₽" class="option-icon">
+                        <h3 class="option-title">До 50 000 ₽</h3>
+                        <p class="option-description">Базовый сайт с основными функциями</p>
+                        <input type="radio" name="question3" value="budget" required>
+                    </div>
+                    <div class="option-card">
+                        <img src="images/medium-icon.svg" alt="50 000 - 150 000 ₽" class="option-icon">
+                        <h3 class="option-title">50 000 - 150 000 ₽</h3>
+                        <p class="option-description">Сайт с расширенным функционалом</p>
+                        <input type="radio" name="question3" value="medium" required>
+                    </div>
+                    <div class="option-card">
+                        <img src="images/premium-icon.svg" alt="Более 150 000 ₽" class="option-icon">
+                        <h3 class="option-title">Более 150 000 ₽</h3>
+                        <p class="option-description">Премиум-решение с индивидуальным дизайном</p>
+                        <input type="radio" name="question3" value="premium" required>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Вопрос 4 -->
+            <div class="question">
+                <h2 class="question-title">Нужна ли интеграция с другими сервисами?</h2>
+                <div class="options-grid">
+                    <div class="option-card">
+                        <img src="images/none-icon.svg" alt="Не требуется" class="option-icon">
+                        <h3 class="option-title">Не требуется</h3>
+                        <p class="option-description">Стандартный сайт без интеграций</p>
+                        <input type="radio" name="question4" value="none" required>
+                    </div>
+                    <div class="option-card">
+                        <img src="images/crm-icon.svg" alt="CRM система" class="option-icon">
+                        <h3 class="option-title">CRM система</h3>
+                        <p class="option-description">Интеграция с CRM для управления клиентами</p>
+                        <input type="radio" name="question4" value="crm" required>
+                    </div>
+                    <div class="option-card">
+                        <img src="images/payment-icon.svg" alt="Платежные системы" class="option-icon">
+                        <h3 class="option-title">Платежные системы</h3>
+                        <p class="option-description">Интеграция с платежными системами</p>
+                        <input type="radio" name="question4" value="payment" required>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Вопрос 5 -->
+            <div class="question">
+                <h2 class="question-title">Нужна ли поддержка сайта?</h2>
+                <div class="options-grid">
+                    <div class="option-card">
+                        <img src="images/no-support-icon.svg" alt="Без поддержки" class="option-icon">
+                        <h3 class="option-title">Без поддержки</h3>
+                        <p class="option-description">Только разработка и запуск</p>
+                        <input type="radio" name="question5" value="no-support" required>
+                    </div>
+                    <div class="option-card">
+                        <img src="images/basic-support-icon.svg" alt="Базовая поддержка" class="option-icon">
+                        <h3 class="option-title">Базовая поддержка</h3>
+                        <p class="option-description">Обновление контента и техническая поддержка</p>
+                        <input type="radio" name="question5" value="basic-support" required>
+                    </div>
+                    <div class="option-card">
+                        <img src="images/full-support-icon.svg" alt="Полная поддержка" class="option-icon">
+                        <h3 class="option-title">Полная поддержка</h3>
+                        <p class="option-description">Комплексное обслуживание и развитие сайта</p>
+                        <input type="radio" name="question5" value="full-support" required>
+                    </div>
+                </div>
+            </div>
+
+            <div class="quiz-navigation">
+                <button type="button" class="prev-btn" disabled>Назад</button>
+                <button type="button" class="next-btn">Далее</button>
+                <button type="submit" class="submit-btn" style="display: none;">Получить предложение</button>
+            </div>
+        </form>
+    </div>
+
+    <div class="quiz-result" style="display: none;">
+        <h2>Спасибо за ответы!</h2>
+        <p>Мы подготовим для вас индивидуальное предложение</p>
+        <form class="contact-form">
+            <input type="text" name="name" placeholder="Ваше имя" required>
+            <div class="phone-input">
+                <span class="country-code">+7</span>
+                <input type="tel" name="phone" placeholder="(999) 999-99-99" required>
+            </div>
+            <input type="email" name="email" placeholder="Ваш email" required>
+            <button type="submit" class="submit-btn">Получить предложение</button>
+        </form>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const form = document.getElementById('quizForm');
+            const questions = form.querySelectorAll('.question');
+            const prevBtn = form.querySelector('.prev-btn');
+            const nextBtn = form.querySelector('.next-btn');
+            const submitBtn = form.querySelector('.submit-btn');
+            let currentQuestion = 0;
+
+            // Функция для показа текущего вопроса
+            function showQuestion(index) {
+                questions.forEach((q, i) => {
+                    q.classList.toggle('active', i === index);
+                });
+                updateNavigationButtons();
+            }
+
+            // Функция для обновления кнопок навигации
+            function updateNavigationButtons() {
+                prevBtn.disabled = currentQuestion === 0;
+                
+                if (currentQuestion === questions.length - 1) {
+                    nextBtn.style.display = 'none';
+                    submitBtn.style.display = 'block';
+                } else {
+                    nextBtn.style.display = 'block';
+                    submitBtn.style.display = 'none';
+                }
+            }
+
+            // Обработчики кнопок навигации
+            prevBtn.addEventListener('click', () => {
+                if (currentQuestion > 0) {
+                    currentQuestion--;
+                    showQuestion(currentQuestion);
+                }
+            });
+
+            nextBtn.addEventListener('click', () => {
+                const currentQuestionElement = questions[currentQuestion];
+                const selectedOption = currentQuestionElement.querySelector('input[type="radio"]:checked');
+                
+                if (selectedOption) {
+                    if (currentQuestion < questions.length - 1) {
+                        currentQuestion++;
+                        showQuestion(currentQuestion);
+                    }
+                } else {
+                    Swal.fire({
+                        title: 'Выберите ответ',
+                        text: 'Пожалуйста, выберите один из вариантов ответа',
+                        icon: 'warning',
+                        confirmButtonText: 'OK'
+                    });
+                }
+            });
+
+            // Обработчик отправки формы
+            form.addEventListener('submit', async (e) => {
+                e.preventDefault();
+                
+                const formData = new FormData(form);
+                const answers = {};
+                
+                // Собираем ответы на вопросы
+                for (let i = 1; i <= 5; i++) {
+                    answers[`question${i}`] = formData.get(`question${i}`);
+                }
+
+                // Показываем форму контактов
+                document.querySelector('.quiz-container').style.display = 'none';
+                document.querySelector('.quiz-result').style.display = 'block';
+
+                // Обработчик формы контактов
+                const contactForm = document.querySelector('.contact-form');
+                contactForm.addEventListener('submit', async (e) => {
+                    e.preventDefault();
+                    
+                    const contactData = new FormData(contactForm);
+                    const data = {
+                        name: contactData.get('name'),
+                        phone: contactData.get('phone'),
+                        email: contactData.get('email'),
+                        answers: answers
+                    };
+
+                    try {
+                        const response = await fetch('send.php', {
+                            method: 'POST',
+                            headers: {
+                                'Content-Type': 'application/json',
+                            },
+                            body: JSON.stringify(data)
+                        });
+
+                        if (!response.ok) {
+                            throw new Error('Network response was not ok');
+                        }
+
+                        const result = await response.json();
+                        
+                        Swal.fire({
+                            title: 'Спасибо!',
+                            text: 'Мы свяжемся с вами в ближайшее время',
+                            icon: 'success',
+                            confirmButtonText: 'OK'
+                        });
+
+                        contactForm.reset();
+                    } catch (error) {
+                        console.error('Error submitting form:', error);
+                        Swal.fire({
+                            title: 'Ошибка',
+                            text: 'Произошла ошибка при отправке формы. Пожалуйста, попробуйте позже.',
+                            icon: 'error',
+                            confirmButtonText: 'OK'
+                        });
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html> 

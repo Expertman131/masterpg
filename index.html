@@ -1,0 +1,512 @@
+<!DOCTYPE html>
+<html lang="ru">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Создание сайтов для бизнеса</title>
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="css/style.css">
+        <script type="module">
+            import { supabase } from './js/supabase.js';
+            import { handleCallbackForm } from './js/callback.js';
+            window.supabase = supabase;
+            
+            // Инициализация обработчика формы
+            document.getElementById('callback-form').addEventListener('submit', handleCallbackForm);
+        </script>
+    </head>
+    <body>
+        <header id="rec882393976" class="header">
+            <div class="container header-container">
+                <a href="/" class="header-logo"> <img src="images/logo.svg" alt="Master Page" width="197" height="35"> </a>
+                <nav class="header-nav">
+                    <a href="/portfolio.html" class="header-link">Портфолио</a>
+                    <a href="/quiz.html" class="header-link">Подобрать сайт</a>
+                </nav>
+                <div class="header-contacts">
+                    <div class="header-messengers">
+                        <a href="https://wa.me/79297020558" class="messenger-link whatsapp" target="_blank"> <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                <path d="M12 2C6.48 2 2 6.48 2 12C2 17.52 6.48 22 12 22C17.52 22 22 17.52 22 12C22 6.48 17.52 2 12 2ZM16.64 15.55C16.4 16.31 15.3 16.96 14.47 17.23C13.93 17.41 13.23 17.55 11.43 16.8C9.14 15.86 7.67 13.54 7.57 13.41C7.47 13.28 6.44 11.91 6.44 10.47C6.44 9.03 7.17 8.34 7.44 8.06C7.67 7.82 8.04 7.71 8.39 7.71C8.5 7.71 8.6 7.71 8.69 7.72C8.96 7.73 9.1 7.75 9.28 8.17C9.5 8.69 10.03 10.13 10.08 10.24C10.13 10.35 10.18 10.5 10.11 10.65C10.04 10.81 9.99 10.91 9.88 11.04C9.77 11.17 9.65 11.33 9.56 11.42C9.45 11.55 9.33 11.69 9.46 11.93C9.59 12.16 10.03 12.89 10.7 13.48C11.57 14.24 12.3 14.5 12.57 14.61C12.77 14.69 13.01 14.67 13.15 14.53C13.33 14.35 13.54 14.03 13.77 13.72C13.93 13.5 14.13 13.47 14.34 13.55C14.56 13.62 15.98 14.32 16.22 14.44C16.46 14.56 16.62 14.62 16.67 14.73C16.72 14.84 16.72 15.52 16.49 15.55H16.64Z" fill="#25D366"/>
+                            </svg> </a>
+                        <a href="https://t.me/79297020558" class="messenger-link telegram" target="_blank"> <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                <path d="M12 2C6.48 2 2 6.48 2 12C2 17.52 6.48 22 12 22C17.52 22 22 17.52 22 12C22 6.48 17.52 2 12 2ZM16.64 8.8C16.49 10.19 15.84 14.21 15.51 16.07C15.37 16.87 15.09 17.14 14.83 17.17C14.25 17.23 13.81 16.79 13.25 16.42C12.37 15.84 11.87 15.49 11.02 14.93C10.03 14.29 10.67 13.94 11.24 13.35C11.39 13.19 13.95 10.84 14 10.6C14.01 10.56 14.01 10.45 13.95 10.4C13.89 10.35 13.8 10.37 13.73 10.38C13.64 10.4 12.15 11.38 9.25 13.33C8.77 13.66 8.34 13.82 7.95 13.81C7.52 13.8 6.7 13.57 6.09 13.37C5.34 13.13 4.75 13 4.8 12.58C4.83 12.36 5.12 12.14 5.68 11.92C8.83 10.55 10.91 9.66 11.93 9.25C14.8 8.06 15.45 7.82 15.87 7.82C15.97 7.82 16.21 7.85 16.37 7.98C16.5 8.09 16.54 8.24 16.55 8.35C16.55 8.44 16.65 8.76 16.64 8.8Z" fill="#0088CC"/>
+                            </svg> </a>
+                    </div>
+                    <a href="tel:+79297020558" class="header-phone">+7(929)702-05-58</a>
+                    <a href="#callback" class="header-callback">Заказать звонок</a>
+                </div>
+            </div>
+        </header>
+        <section class="hero">
+            <div class="container">
+                <div class="hero-content">
+                    <div class="hero-text">
+                        <h1>СОЗДАЕМ<br>ПРОДАЮЩИЕ САЙТЫ<br>ДЛЯ БИЗНЕСА!</h1>
+                        <p class="subheader">Проектируем и разрабатываем с нуля, запускаем<br>и продолжаем развивать<br>на протяжении всего жизненного цикла.</p>
+                        <ul class="features-list">
+                            <li>
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                    <circle cx="12" cy="12" r="12" fill="#9747FF"/>
+                                    <path d="M7 12L10.5 15.5L17 9" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                </svg>
+                                Сайт за 10 дней
+                            </li>
+                            <li>
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                    <circle cx="12" cy="12" r="12" fill="#9747FF"/>
+                                    <path d="M7 12L10.5 15.5L17 9" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                </svg>
+                                Скидка 50% на рекламную компанию
+                            </li>
+                            <li>
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                    <circle cx="12" cy="12" r="12" fill="#9747FF"/>
+                                    <path d="M7 12L10.5 15.5L17 9" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                </svg>
+                                Готовое решение (структура) + уникальный дизайн
+                            </li>
+                        </ul>
+                        <div class="hero-buttons">
+                            <a href="#portfolio" class="btn">Портфолио</a>
+                            <a href="/quiz.html" class="btn btn-outline">Подобрать сайт</a>
+                        </div>
+                    </div>
+                    <div class="hero-image">
+                        <div class="image-wrapper">
+                            <img src="images/hero-image.jpg" alt="Креативный дизайн">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="hero-background"></div>
+        </section>
+        <!-- Services Section -->
+        <section class="services">
+            <img src="images/decor.png" alt="" class="services-decor">
+            <div class="container">
+                <h2 class="section-title">Также мы занимаемся:</h2>
+                <p class="section-description subheader">Предлагаем полный спектр услуг по созданию и продвижению сайтов</p>
+                <div class="services-grid">
+                    <div class="service-card">
+                        <div class="service-icon">
+                            <img src="images/svg1.png" alt="SEO продвижение">
+                        </div>
+                        <h3>SEO продвижение сайтов</h3>
+                    </div>
+                    <div class="service-card">
+                        <div class="service-icon">
+                            <img src="images/svg2.png" alt="Контекстная реклама">
+                        </div>
+                        <h3>Настройка контекстной рекламы</h3>
+                    </div>
+                    <div class="service-card">
+                        <div class="service-icon">
+                            <img src="images/svg3.png" alt="Таргетированная реклама">
+                        </div>
+                        <h3>Таргетированная реклама в соцсетях</h3>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- Site Types Section -->
+        <section class="site-types">
+            <img src="images/Elips2.svg" alt="" class="types-decor">
+            <div class="container">
+                <h2 class="section-title">Какие типы сайтов мы<br>разрабатываем.</h2>
+                <p class="section-description subheader">Создаем различные типы сайтов под ваши бизнес-задачи</p>
+                <div class="types-grid">
+                    <div class="types-content">
+                        <div class="type-card">
+                            <div class="card-icon">
+                                <img src="images/star.svg" alt="Сайт визитка" width="24" height="24">
+                            </div>
+                            <h3>Сайт визитка (Landin Page)</h3>
+                            <p>Вариант недорогого, но функционального сайта, который будет являться визитной карточкой вашей компании. На нем будет собрана основная контактная информация, а также преимущества работы с вашей компанией, ассортимент товаров и услуг.</p>
+                            <div class="type-info">От 15 000 руб. От 10 дней.</div>
+                            <a href="#">Сделать заказ</a>
+                        </div>
+                        <div class="type-card">
+                            <div class="card-icon">
+                                <img src="images/star.svg" alt="Корпоративный сайт" width="24" height="24">
+                            </div>
+                            <h3>Корпоративный сайт</h3>
+                            <p>Представит вашу компанию в выгодном свете в сети. Это главная площадка, которая будет привлекать именно вашу целевую аудиторию — бизнес-партнеров, постоянных клиентов и медиа. Сайт привлечет инвесторов и дилеров — это отличная возможность для развития.</p>
+                            <div class="type-info">От 35 000 руб. От 20 дней.</div>
+                            <a href="#">Сделать заказ</a>
+                        </div>
+                        <div class="type-card">
+                            <div class="card-icon">
+                                <img src="images/star.svg" alt="Интернет-магазин" width="24" height="24">
+                            </div>
+                            <h3>Интернет-магазин</h3>
+                            <p>Один из самых выгодных и перспективных инструментов онлайн-бизнеса, который позволяет вести бизнес по всему миру. Интернет магазин работает круглосуточно и поэтому пользователи смогут в любое время ознакомиться с Вашим каталогом товаров.</p>
+                            <div class="type-info">От 35 000 руб. От 20 дней.</div>
+                            <a href="#">Сделать заказ</a>
+                        </div>
+                    </div>
+                    <div class="types-image">
+                        <img src="images/imghow.png" alt="Разработка сайтов">
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- Why Us Section -->
+        <section class="why-us">
+            <img src="images/decor2.png" alt="" class="decor2">
+            <div class="container">
+                <h2 class="section-title">Почему выбирают нас?</h2>
+                <p class="section-description subheader">Мы создаем не просто сайты, а эффективные инструменты для вашего бизнеса</p>
+                <div class="why-us-container">
+                    <div class="why-item">
+                        <div class="why-icon">
+                            <svg width="84" height="84" viewBox="0 0 84 84" fill="none">
+                                <path d="M40.2307 70.5411C22.8233 70.5411 8.71191 56.5461 8.71191 39.2827C8.71191 22.0193 22.8233 8.02441 40.2307 8.02441" stroke="#A463CF" stroke-width="1.29171" stroke-linecap="round"/>
+                                <path d="M42.0391 64.3411C55.3086 64.3411 66.0657 53.4691 66.0657 40.0577C66.0657 26.6464 55.3086 15.7744 42.0391 15.7744C28.7695 15.7744 18.0125 26.6464 18.0125 40.0577C18.0125 53.4691 28.7695 64.3411 42.0391 64.3411Z" fill="white"/>
+                                <path d="M51.942 48.8505V45.4834C51.942 45.1505 52.2119 44.8805 52.5446 44.8805C52.8779 44.8805 53.1476 45.1505 53.1476 45.4834V50.3058C53.1476 50.6387 52.8779 50.9086 52.5446 50.9086H47.7224C47.3895 50.9086 47.1196 50.6387 47.1196 50.3058C47.1196 49.9729 47.3895 49.703 47.7224 49.703H51.0895L47.2961 45.9097C47.0608 45.6742 47.0608 45.2925 47.2961 45.057C47.5315 44.8217 47.9132 44.8217 48.1487 45.057L51.942 48.8505ZM32.6524 31.2659V34.633C32.6524 34.9659 32.3825 35.2358 32.0496 35.2358C31.7166 35.2358 31.4468 34.9659 31.4468 34.633V29.8106C31.4468 29.4776 31.7166 29.2078 32.0496 29.2078H36.872C37.2049 29.2078 37.4748 29.4776 37.4748 29.8106C37.4748 30.1435 37.2049 30.4133 36.872 30.4133H33.5049L37.2982 34.2067C37.5336 34.4422 37.5336 34.8238 37.2982 35.0592C37.0628 35.2946 36.6812 35.2946 36.4457 35.0592L32.6524 31.2659ZM33.5049 49.703H36.872C37.2049 49.703 37.4748 49.9729 37.4748 50.3058C37.4748 50.6387 37.2049 50.9086 36.872 50.9086H32.0496C31.7166 50.9086 31.4468 50.6387 31.4468 50.3058V45.4834C31.4468 45.1505 31.7166 44.8805 32.0496 44.8805C32.3825 44.8805 32.6524 45.1505 32.6524 45.4834V48.8505L36.4457 45.057C36.6812 44.8217 37.0628 44.8217 37.2982 45.057C37.5336 45.2925 37.5336 45.6742 37.2982 45.9097L33.5049 49.703ZM51.0895 30.4133H47.7224C47.3895 30.4133 47.1196 30.1435 47.1196 29.8106C47.1196 29.4776 47.3895 29.2078 47.7224 29.2078H52.5446C52.8779 29.2078 53.1476 29.4776 53.1476 29.8106V34.6705C53.1476 35.0034 52.8779 35.2733 52.5446 35.2733C52.2119 35.2733 51.942 35.0034 51.942 34.6705V31.2659L48.1487 35.0592C47.9132 35.2946 47.5315 35.2946 47.2961 35.0592C47.0608 34.8238 47.0608 34.4422 47.2961 34.2067L51.0895 30.4133Z" fill="#A463CF"/>
+                            </svg>
+                        </div>
+                        <h3>Комплексный подход</h3>
+                        <p>Все наши решения идут комплексно — с настройкой рекламы и маркетинговыми инструментами.</p>
+                    </div>
+                    <div class="why-item">
+                        <div class="why-icon">
+                            <svg width="84" height="84" viewBox="0 0 84 84" fill="none">
+                                <path d="M40.5508 70.5411C23.1434 70.5411 9.03198 56.5461 9.03198 39.2827C9.03198 22.0193 23.1434 8.02441 40.5508 8.02441" stroke="#A463CF" stroke-width="1.29171" stroke-linecap="round"/>
+                                <path d="M42.3591 64.3411C55.6287 64.3411 66.3857 53.4691 66.3857 40.0577C66.3857 26.6464 55.6287 15.7744 42.3591 15.7744C29.0896 15.7744 18.3325 26.6464 18.3325 40.0577C18.3325 53.4691 29.0896 64.3411 42.3591 64.3411Z" fill="white"/>
+                                <path d="M44.7873 33.5869C44.7873 35.6826 46.4876 37.3816 48.585 37.3816C50.6824 37.3816 52.3826 35.6826 52.3826 33.5869C52.3826 31.4789 50.6861 29.7837 48.5934 29.7837C46.4868 29.7879 44.7873 31.4894 44.7873 33.5869ZM45.5291 29.7775L36.6506 29.7837C34.5514 29.7879 32.8519 31.4894 32.8519 33.5869C32.8519 35.6826 34.5521 37.3816 36.6495 37.3816H45.5157C44.4095 36.4872 43.7023 35.1196 43.7023 33.5869C43.7023 32.0471 44.4151 30.6734 45.5291 29.7775ZM48.6868 28.7006C51.3406 28.7551 53.4676 30.9144 53.4676 33.57C53.4676 36.2814 51.2816 38.4658 48.585 38.4658H36.6495C33.9529 38.4658 31.7668 36.2814 31.7668 33.5869C31.7668 30.8914 33.9509 28.7048 36.6491 28.6996L48.5846 28.6911C48.6195 28.6911 48.6536 28.6944 48.6868 28.7006ZM36.5478 40.6268C36.5809 40.6205 36.615 40.6172 36.6499 40.6172L48.5854 40.6257C51.2836 40.631 53.4676 42.8175 53.4676 45.5131C53.4676 48.2076 51.2816 50.3919 48.585 50.3919H36.6495C33.9529 50.3919 31.7668 48.2076 31.7668 45.4961C31.7668 42.8405 33.894 40.6812 36.5478 40.6268ZM40.4472 45.5131C40.4472 43.4156 38.7476 41.714 36.6411 41.7099C34.5484 41.7099 32.8519 43.405 32.8519 45.5131C32.8519 47.6088 34.5521 49.3077 36.6495 49.3077C38.7469 49.3077 40.4472 47.6088 40.4472 45.5131ZM39.7055 41.7036C40.8194 42.5995 41.5322 43.9733 41.5322 45.5131C41.5322 47.0456 40.825 48.4133 39.7187 49.3077H48.585C50.6824 49.3077 52.3826 47.6088 52.3826 45.5131C52.3826 43.4156 50.6831 41.714 48.5839 41.7099L39.7055 41.7036Z" fill="#A463CF" stroke="#A463CF" stroke-width="0.258343"/>
+                            </svg>
+                        </div>
+                        <h3>СЕО настройка</h3>
+                        <p>Все проекты, которые реализованы нашим агентством, имеют продающую структуру и оптимизированы под SEO</p>
+                    </div>
+                    <div class="why-item">
+                        <div class="why-icon">
+                            <svg width="84" height="84" viewBox="0 0 84 84" fill="none">
+                                <path d="M39.8808 70.5411C22.4735 70.5411 8.36206 56.5461 8.36206 39.2827C8.36206 22.0193 22.4735 8.02441 39.8808 8.02441" stroke="#A463CF" stroke-width="1.29171" stroke-linecap="round"/>
+                                <path d="M41.6892 64.3411C54.9587 64.3411 65.7158 53.4691 65.7158 40.0577C65.7158 26.6464 55.6287 15.7744 42.3591 15.7744C29.0896 15.7744 18.3325 26.6464 18.3325 40.0577C18.3325 53.4691 29.0896 64.3411 42.3591 64.3411Z" fill="white"/>
+                                <path d="M47.8688 36.444L48.7126 31.4148L52.0893 36.444H47.8688ZM47.5604 37.65H51.8961L43.6567 47.127L47.5604 37.65ZM35.8165 37.65L39.7202 47.127L31.4794 37.65H35.8165ZM35.5081 36.444H31.2875L34.6643 31.4148L35.5081 36.444ZM36.59 35.5575L35.7267 30.4138H40.4743L36.59 35.5575ZM42.9027 30.4138H47.6502L46.787 35.5575L42.9027 30.4138ZM37.4387 36.444L41.6885 30.8154L45.9382 36.444H37.4387ZM46.2479 37.65L41.6885 48.7214L37.1291 37.65H46.2479ZM53.7288 36.7129L48.8717 29.4767C48.8705 29.4743 48.8669 29.4731 48.8657 29.4707C48.8147 29.3971 48.7479 29.3368 48.6677 29.2922C48.6447 29.2789 48.6192 29.2753 48.5961 29.2644C48.5524 29.2475 48.5136 29.2234 48.4662 29.2162C48.4468 29.2126 48.4273 29.2198 48.4067 29.2174C48.3933 29.2174 48.3812 29.2078 48.3666 29.2078H35.0103C34.9957 29.2078 34.9836 29.2174 34.969 29.2174C34.9496 29.2198 34.9314 29.2126 34.9107 29.2162C34.8634 29.2234 34.8246 29.2475 34.782 29.2644C34.7577 29.2753 34.7323 29.2789 34.7104 29.2922C34.6303 29.3368 34.5623 29.3971 34.5125 29.4707C34.51 29.4731 34.5076 29.4743 34.5052 29.4767L29.6484 36.7129C29.4978 36.9385 29.516 37.2363 29.6945 37.4414L41.2295 50.7078C41.255 50.7379 41.2902 50.7512 41.3206 50.7753C41.3473 50.7958 41.3703 50.8187 41.4007 50.8344C41.5816 50.9333 41.7953 50.9333 41.9763 50.8344C42.0066 50.8187 42.0297 50.7958 42.0564 50.7753C42.0867 50.7512 42.122 50.7379 42.1487 50.7078L53.6838 37.4414C53.8621 37.2363 53.8802 36.9385 53.7288 36.7129Z" fill="#A463CF"/>
+                            </svg>
+                        </div>
+                        <h3>Команда профессионалов</h3>
+                        <p>Трудятся над каждым проектом: маркетолог, копирайтер, дизайнер, верстальщик, директолог, менеджер.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- Portfolio Section -->
+        <section class="portfolio" id="portfolio">
+            <div class="container">
+                <h2 class="section-title">Наши работы</h2>
+                <p class="section-description subheader">Ознакомьтесь с нашими последними работами</p>
+                <div class="portfolio-grid">
+                    <div class="portfolio-card">
+                        <div class="portfolio-card-image">
+                            <img src="images/portf1.jpg" alt="Дезинфекция Насекомых">
+                        </div>
+                        <div class="portfolio-card-content">
+                            <div class="portfolio-card-date">Февраль 2024</div>
+                            <h3>Дезинфекция Насекомых</h3>
+                            <p>Сайт для компании по дезинфекции помещений. Современный дизайн и удобный функционал для заказа услуг онлайн.</p>
+                            <div class="portfolio-card-link">
+                                <span class="link-text">Перейти</span>
+                                <svg class="arrow-icon" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                    <path d="M5 12H19M19 12L12 5M19 12L12 19" stroke="#9747FF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                </svg>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="portfolio-card">
+                        <div class="portfolio-card-image">
+                            <img src="images/portf2.jpg" alt="Правовая защита">
+                        </div>
+                        <div class="portfolio-card-content">
+                            <div class="portfolio-card-date">Январь 2024</div>
+                            <h3>Правовая защита</h3>
+                            <p>Корпоративный сайт юридической компании с каталогом услуг и онлайн-консультацией.</p>
+                            <div class="portfolio-card-link">
+                                <span class="link-text">Перейти</span>
+                                <svg class="arrow-icon" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                    <path d="M5 12H19M19 12L12 5M19 12L12 19" stroke="#9747FF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                </svg>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="portfolio-card">
+                        <div class="portfolio-card-image">
+                            <img src="images/portf3.jpg" alt="Мазда-центр">
+                        </div>
+                        <div class="portfolio-card-content">
+                            <div class="portfolio-card-date">Декабрь 2023</div>
+                            <h3>Мазда-центр</h3>
+                            <p>Сайт официального дилера Mazda с каталогом автомобилей и онлайн-записью на тест-драйв.</p>
+                            <div class="portfolio-card-link">
+                                <span class="link-text">Перейти</span>
+                                <svg class="arrow-icon" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                    <path d="M5 12H19M19 12L12 5M19 12L12 19" stroke="#9747FF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                </svg>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="portfolio-card">
+                        <div class="portfolio-card-image">
+                            <img src="images/portf4.jpg" alt="Рускухни">
+                        </div>
+                        <div class="portfolio-card-content">
+                            <div class="portfolio-card-date">Ноябрь 2023</div>
+                            <h3>Рускухни</h3>
+                            <p>Интернет-магазин кухонной мебели с конфигуратором и возможностью заказа замера онлайн.</p>
+                            <div class="portfolio-card-link">
+                                <span class="link-text">Перейти</span>
+                                <svg class="arrow-icon" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                    <path d="M5 12H19M19 12L12 5M19 12L12 19" stroke="#9747FF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                </svg>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="portfolio-actions">
+                    <a href="portfolio.html" class="btn">Смотреть все работы</a>
+                </div>
+            </div>
+        </section>
+        <!-- Process Section -->
+        <section class="process" id="process">
+            <div class="process-grid">
+                <div class="process-content">
+                    <h2>Процесс создания</h2>
+                    <p class="subheader">Прозрачный процесс разработки от идеи до запуска</p>
+                    <img src="images/arrow.svg" alt="Стрелка вниз" class="process-arrow">
+                </div>
+                <div class="process-steps">
+                    <div class="step-card">
+                        <span class="step-label">Знакомство</span>
+                        <h3>01. Обсуждение проекта.</h3>
+                        <p>Перед началом работы с проектом, проходит знакомство с продуктом или услугой, изучение рекламной ниши и конкурентов, определяются задачи landing page и варианты их решения, после чего определяется объем и стоимость создания landing page (одностраничного сайта).</p>
+                        <div class="step-features">
+                            <div class="feature-item">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                    <path d="M20 6L9 17L4 12" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                </svg>
+                                Изучение конкурентов
+                            </div>
+                            <div class="feature-item">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                    <path d="M20 6L9 17L4 12" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                </svg>
+                                Составление сметы
+                            </div>
+                            <div class="feature-item">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                    <path d="M20 6L9 17L4 12" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                </svg>
+                                Знакомство с продуктом
+                            </div>
+                            <div class="feature-item">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                    <path d="M20 6L9 17L4 12" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                </svg>
+                                Определение задач
+                            </div>
+                        </div>
+                    </div>
+                    <div class="step-card">
+                        <span class="step-label">Проектирование</span>
+                        <h3>02. Прототип.</h3>
+                        <p>В процессе создания landing page или многостраничного сайта подробно изучаются информационные поисковые запросы пользователей, а также опыт конкурентов на примере большого выбора сайтов. После чего составляются тексты, разрабатывается CTA и создается прототип страницы.</p>
+                        <div class="step-features">
+                            <div class="feature-item">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                    <path d="M20 6L9 17L4 12" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                </svg>
+                                Написание текста
+                            </div>
+                            <div class="feature-item">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                    <path d="M20 6L9 17L4 12" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                </svg>
+                                Создание прототипа
+                            </div>
+                            <div class="feature-item">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                    <path d="M20 6L9 17L4 12" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                </svg>
+                                Анализ конкурентов
+                            </div>
+                            <div class="feature-item">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                    <path d="M20 6L9 17L4 12" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                </svg>
+                                Разработка CTA
+                            </div>
+                        </div>
+                    </div>
+                    <div class="step-card">
+                        <span class="step-label">Основной объем</span>
+                        <h3>03. Разработка.</h3>
+                        <p>На этапе разработки сайта окончательно дорабатывается текст, создается дизайн, настраивается мобильная адаптивность, а также разрабатываются Call To Action с формами захвата внимания посетителей. После чего устанавливаются и настраиваются системы статистики и аналитики.</p>
+                        <div class="step-features">
+                            <div class="feature-item">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                    <path d="M20 6L9 17L4 12" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                </svg>
+                                Современный дизайн
+                            </div>
+                            <div class="feature-item">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                    <path d="M20 6L9 17L4 12" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                </svg>
+                                Мобильная адаптивность
+                            </div>
+                            <div class="feature-item">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                    <path d="M20 6L9 17L4 12" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                </svg>
+                                Настройка форм захвата
+                            </div>
+                            <div class="feature-item">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                    <path d="M20 6L9 17L4 12" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                </svg>
+                                Настройка аналитики
+                            </div>
+                        </div>
+                    </div>
+                    <div class="step-card">
+                        <span class="step-label">Аналитика</span>
+                        <h3>04. Запуск рекламы.</h3>
+                        <p>После создания сайта настраивается и запускается контекстная реклама по целевым запросам, анализируется поведение пользователей на странице и эффективность CTA. На основании полученных данных проводится доработка landing page для повышения конверсии.</p>
+                        <div class="step-features">
+                            <div class="feature-item">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                    <path d="M20 6L9 17L4 12" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                </svg>
+                                Запуск рекламы
+                            </div>
+                            <div class="feature-item">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                    <path d="M20 6L9 17L4 12" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                </svg>
+                                Анализ конверсии
+                            </div>
+                            <div class="feature-item">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                    <path d="M20 6L9 17L4 12" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                </svg>
+                                Эффективность CTA
+                            </div>
+                            <div class="feature-item">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                    <path d="M20 6L9 17L4 12" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                </svg>
+                                Доработка страницы
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- Callback Section -->
+        <section class="callback-section">
+            <div class="container callback-container">
+                <div class="callback-content">
+                    <h2>Хотите, мы вам перезвоним?</h2>
+                    <p class="subheader">Оставьте заявку, и мы подробно ответим на все Ваши вопросы, опишем возможности и наметим план действий.</p>
+                    <form class="callback-inline-form">
+                        <div class="phone-input-wrapper">
+                            <span class="country-code">+7</span>
+                            <input type="tel" placeholder="(***)-***-**-**" required>
+                        </div>
+                        <button type="submit" class="callback-submit">Заказать звонок</button>
+                    </form>
+                </div>
+                <div class="callback-image">
+                    <img src="images/man.png" alt="Менеджер">
+                </div>
+            </div>
+        </section>
+        <!-- Modal Popup -->
+        <div class="modal" id="callback-modal">
+            <div class="modal-content">
+                <button class="modal-close">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                        <path d="M18 6L6 18M6 6L18 18" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </button>
+                <h2>Заказать обратный звонок</h2>
+                <p>Впишите своё имя и телефон и мы<br>перезвоним в течении 5 мин.</p>
+                <form class="callback-form" id="callback-form">
+                    <input type="text" name="name" placeholder="Ваше имя" required>
+                    <div class="phone-input">
+                        <span class="country-code">+7</span>
+                        <input type="tel" name="phone" placeholder="(999) 999-99-99" required>
+                    </div>
+                    <button type="submit" class="submit-btn">Отправить заявку</button>
+                </form>
+            </div>
+        </div>
+        <!-- Scripts -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/smoothscroll/1.4.10/SmoothScroll.min.js" integrity="sha256-huW7yWl7tNfP7lGk46XE+Sp0nCotjzYodhVKlwaNeco=" crossorigin="anonymous"></script>
+        <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+        <script type="text/javascript">
+        (function() {
+            emailjs.init("YOUR_PUBLIC_KEY"); // Замените на ваш публичный ключ
+        })();
+    </script>
+        <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14"></script>
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+        <script src="js/main.js"></script>
+        <script src="js/live-reload.js"></script>
+        <script>
+        // Анимация декоративных элементов при скролле
+        const decor2 = document.querySelector('.why-us .decor2');
+        const whyUsSection = document.querySelector('.why-us');
+        let requestId;
+        let lastScrollTop = window.pageYOffset || document.documentElement.scrollTop;
+
+        window.addEventListener('scroll', function() {
+            if (requestId) {
+                cancelAnimationFrame(requestId);
+            }
+            
+            requestId = requestAnimationFrame(function() {
+                const rect = whyUsSection.getBoundingClientRect();
+                const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+                const scrollDirection = scrollTop > lastScrollTop ? 1 : -1;
+                
+                const viewportHeight = window.innerHeight;
+                const elementTop = rect.top;
+                const elementHeight = rect.height;
+                
+                const startOffset = viewportHeight * 0.5;
+                const totalDistance = viewportHeight + elementHeight;
+                
+                let progress = (startOffset - elementTop) / totalDistance;
+                progress = Math.min(Math.max(progress, 0), 1);
+                
+                const translateX = 600 * progress;
+                const inertiaFactor = 0.1;
+                const smoothTranslateX = translateX + (scrollDirection * inertiaFactor * Math.abs(scrollTop - lastScrollTop));
+                
+                decor2.style.setProperty('--tx', `${smoothTranslateX}px`);
+                lastScrollTop = scrollTop;
+            });
+        });
+    </script>
+        <!-- Footer -->
+        <footer class="footer" id="footer">
+            <div class="container">
+                <div class="footer-wrapper">
+                    <div class="footer-copyright">© Master Page 2010-2024</div>
+                    <a href="tel:+79297020558" class="footer-phone"> <i class="phone-icon"></i> <span>8 (929) 702-05-58</span> </a>
+                </div>
+            </div>
+        </footer>
+    </body>
+</html>
