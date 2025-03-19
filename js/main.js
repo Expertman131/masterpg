@@ -5,82 +5,92 @@ document.addEventListener('DOMContentLoaded', function() {
     let requestId;
     let lastScrollTop = window.pageYOffset || document.documentElement.scrollTop;
     
+    // Проверяем наличие элементов перед добавлением обработчиков
+    if (decorElement && servicesSection) {
+        window.addEventListener('scroll', function() {
+            // Анимация для services-decor
+            if (requestId) {
+                cancelAnimationFrame(requestId);
+            }
+            
+            requestId = requestAnimationFrame(function() {
+                const rect = servicesSection.getBoundingClientRect();
+                const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+                const scrollDirection = scrollTop > lastScrollTop ? 1 : -1;
+                
+                const viewportHeight = window.innerHeight;
+                const elementTop = rect.top;
+                const elementHeight = rect.height;
+                
+                const startOffset = viewportHeight * 0.5;
+                const totalDistance = viewportHeight + elementHeight;
+                
+                let progress = (startOffset - elementTop) / totalDistance;
+                progress = Math.min(Math.max(progress, 0), 1);
+                
+                const translateX = -600 * progress;
+                const inertiaFactor = 0.1;
+                const smoothTranslateX = translateX + (scrollDirection * inertiaFactor * Math.abs(scrollTop - lastScrollTop));
+                
+                decorElement.style.setProperty('--tx', `${smoothTranslateX}px`);
+            });
+        });
+    }
+
     // Элементы для why-us-decor
     const whyUsDecorElement = document.querySelector('.why-us-decor');
     const whyUsSection = document.querySelector('.why-us');
     let whyUsRequestId;
     
-    window.addEventListener('scroll', function() {
-        // Анимация для services-decor
-        if (requestId) {
-            cancelAnimationFrame(requestId);
-        }
-        
-        requestId = requestAnimationFrame(function() {
-            const rect = servicesSection.getBoundingClientRect();
-            const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-            const scrollDirection = scrollTop > lastScrollTop ? 1 : -1;
+    // Проверяем наличие элементов перед добавлением обработчиков
+    if (whyUsDecorElement && whyUsSection) {
+        window.addEventListener('scroll', function() {
+            // Анимация для why-us-decor
+            if (whyUsRequestId) {
+                cancelAnimationFrame(whyUsRequestId);
+            }
             
-            const viewportHeight = window.innerHeight;
-            const elementTop = rect.top;
-            const elementHeight = rect.height;
-            
-            const startOffset = viewportHeight * 0.5;
-            const totalDistance = viewportHeight + elementHeight;
-            
-            let progress = (startOffset - elementTop) / totalDistance;
-            progress = Math.min(Math.max(progress, 0), 1);
-            
-            const translateX = -600 * progress;
-            const inertiaFactor = 0.1;
-            const smoothTranslateX = translateX + (scrollDirection * inertiaFactor * Math.abs(scrollTop - lastScrollTop));
-            
-            decorElement.style.setProperty('--tx', `${smoothTranslateX}px`);
+            whyUsRequestId = requestAnimationFrame(function() {
+                const rect = whyUsSection.getBoundingClientRect();
+                const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+                const scrollDirection = scrollTop > lastScrollTop ? 1 : -1;
+                
+                const viewportHeight = window.innerHeight;
+                const elementTop = rect.top;
+                const elementHeight = rect.height;
+                
+                const startOffset = viewportHeight * 0.5;
+                const totalDistance = viewportHeight + elementHeight;
+                
+                let progress = (startOffset - elementTop) / totalDistance;
+                progress = Math.min(Math.max(progress, 0), 1);
+                
+                const translateX = -600 * progress;
+                const inertiaFactor = 0.1;
+                const smoothTranslateX = translateX + (scrollDirection * inertiaFactor * Math.abs(scrollTop - lastScrollTop));
+                
+                whyUsDecorElement.style.setProperty('--tx-why', `${smoothTranslateX}px`);
+                lastScrollTop = scrollTop;
+            });
         });
-
-        // Анимация для why-us-decor
-        if (whyUsRequestId) {
-            cancelAnimationFrame(whyUsRequestId);
-        }
-        
-        whyUsRequestId = requestAnimationFrame(function() {
-            const rect = whyUsSection.getBoundingClientRect();
-            const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-            const scrollDirection = scrollTop > lastScrollTop ? 1 : -1;
-            
-            const viewportHeight = window.innerHeight;
-            const elementTop = rect.top;
-            const elementHeight = rect.height;
-            
-            const startOffset = viewportHeight * 0.5;
-            const totalDistance = viewportHeight + elementHeight;
-            
-            let progress = (startOffset - elementTop) / totalDistance;
-            progress = Math.min(Math.max(progress, 0), 1);
-            
-            const translateX = -600 * progress;
-            const inertiaFactor = 0.1;
-            const smoothTranslateX = translateX + (scrollDirection * inertiaFactor * Math.abs(scrollTop - lastScrollTop));
-            
-            whyUsDecorElement.style.setProperty('--tx-why', `${smoothTranslateX}px`);
-            lastScrollTop = scrollTop;
-        });
-    });
+    }
 });
 
 // Настройки для плавной прокрутки
-SmoothScroll({
-    animationTime    : 800,
-    stepSize         : 85,
-    accelerationDelta : 20,  
-    accelerationMax   : 1.5,   
-    keyboardSupport   : true,  
-    arrowScroll       : 50,
-    pulseAlgorithm   : true,
-    pulseScale       : 4,
-    pulseNormalize   : 1,
-    touchpadSupport   : true,
-});
+if (typeof SmoothScroll === 'function') {
+    SmoothScroll({
+        animationTime    : 800,
+        stepSize         : 85,
+        accelerationDelta : 20,  
+        accelerationMax   : 1.5,   
+        keyboardSupport   : true,  
+        arrowScroll       : 50,
+        pulseAlgorithm   : true,
+        pulseScale       : 4,
+        pulseNormalize   : 1,
+        touchpadSupport   : true,
+    });
+}
 
 // Анимация для types-image
 document.addEventListener('DOMContentLoaded', function() {
@@ -91,53 +101,56 @@ document.addEventListener('DOMContentLoaded', function() {
     let requestId;
     let lastScrollTop = window.pageYOffset || document.documentElement.scrollTop;
     
-    function calculateMaxTranslation() {
-        const contentHeight = typesContent.offsetHeight;
-        const imageHeight = typesImageElement.offsetHeight;
-        return contentHeight - imageHeight;
-    }
+    // Проверяем наличие всех необходимых элементов
+    if (typesImageElement && typesDecorElement && typesSection && typesContent) {
+        function calculateMaxTranslation() {
+            const contentHeight = typesContent.offsetHeight;
+            const imageHeight = typesImageElement.offsetHeight;
+            return contentHeight - imageHeight;
+        }
 
-    function calculateScrollProgress() {
-        const rect = typesSection.getBoundingClientRect();
-        const viewportHeight = window.innerHeight;
-        const elementTop = rect.top;
-        const elementHeight = rect.height;
-        const startOffset = viewportHeight * 0.5;
-        const totalDistance = viewportHeight + elementHeight;
-        let progress = (startOffset - elementTop) / totalDistance;
-        return Math.min(Math.max(progress, 0), 1);
-    }
-    
-    window.addEventListener('scroll', function() {
-        if (requestId) {
-            cancelAnimationFrame(requestId);
+        function calculateScrollProgress() {
+            const rect = typesSection.getBoundingClientRect();
+            const viewportHeight = window.innerHeight;
+            const elementTop = rect.top;
+            const elementHeight = rect.height;
+            const startOffset = viewportHeight * 0.5;
+            const totalDistance = viewportHeight + elementHeight;
+            let progress = (startOffset - elementTop) / totalDistance;
+            return Math.min(Math.max(progress, 0), 1);
         }
         
-        requestId = requestAnimationFrame(function() {
-            const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-            const scrollDirection = scrollTop > lastScrollTop ? 1 : -1;
-            const progress = calculateScrollProgress();
+        window.addEventListener('scroll', function() {
+            if (requestId) {
+                cancelAnimationFrame(requestId);
+            }
             
-            const maxTranslation = calculateMaxTranslation();
-            const translateY = maxTranslation * progress;
-            const inertiaFactor = 0.1;
-            const smoothTranslateY = translateY + (scrollDirection * inertiaFactor * Math.abs(scrollTop - lastScrollTop));
-            typesImageElement.style.setProperty('--ty', `${smoothTranslateY}px`);
+            requestId = requestAnimationFrame(function() {
+                const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+                const scrollDirection = scrollTop > lastScrollTop ? 1 : -1;
+                const progress = calculateScrollProgress();
+                
+                const maxTranslation = calculateMaxTranslation();
+                const translateY = maxTranslation * progress;
+                const inertiaFactor = 0.1;
+                const smoothTranslateY = translateY + (scrollDirection * inertiaFactor * Math.abs(scrollTop - lastScrollTop));
+                typesImageElement.style.setProperty('--ty', `${smoothTranslateY}px`);
 
-            const translateYDecor = -120 * progress;
-            const smoothTranslateYDecor = translateYDecor + (scrollDirection * inertiaFactor * Math.abs(scrollTop - lastScrollTop));
-            typesDecorElement.style.setProperty('--ty-decor', `${smoothTranslateYDecor}px`);
-            
-            lastScrollTop = scrollTop;
+                const translateYDecor = -120 * progress;
+                const smoothTranslateYDecor = translateYDecor + (scrollDirection * inertiaFactor * Math.abs(scrollTop - lastScrollTop));
+                typesDecorElement.style.setProperty('--ty-decor', `${smoothTranslateYDecor}px`);
+                
+                lastScrollTop = scrollTop;
+            });
         });
-    });
 
-    window.addEventListener('resize', function() {
-        const maxTranslation = calculateMaxTranslation();
-        const progress = calculateScrollProgress();
-        const translateY = maxTranslation * progress;
-        typesImageElement.style.setProperty('--ty', `${translateY}px`);
-    });
+        window.addEventListener('resize', function() {
+            const maxTranslation = calculateMaxTranslation();
+            const progress = calculateScrollProgress();
+            const translateY = maxTranslation * progress;
+            typesImageElement.style.setProperty('--ty', `${translateY}px`);
+        });
+    }
 });
 
 // Модальное окно
@@ -654,28 +667,42 @@ function handleHeaderVisibility() {
 // Инициализация функций при загрузке страницы
 document.addEventListener('DOMContentLoaded', function() {
     // Инициализация Vue для портфолио
-    new Vue({
-        el: '#app',
-        data: {
-            showHidden: false
-        },
-        methods: {
-            toggleHidden: function() {
-                this.showHidden = !this.showHidden;
-                const hiddenCards = document.querySelector('.hidden-cards');
-                if (this.showHidden) {
-                    hiddenCards.classList.add('show');
-                    document.querySelector('.show-more-btn').textContent = 'Скрыть';
-                } else {
-                    hiddenCards.classList.remove('show');
-                    document.querySelector('.show-more-btn').textContent = 'Показать еще';
+    const appElement = document.getElementById('app');
+    if (appElement) {
+        new Vue({
+            el: '#app',
+            data: {
+                showHidden: false
+            },
+            methods: {
+                toggleHidden: function() {
+                    this.showHidden = !this.showHidden;
+                    const hiddenCards = document.querySelector('.hidden-cards');
+                    if (hiddenCards) {
+                        if (this.showHidden) {
+                            hiddenCards.classList.add('show');
+                            const showMoreBtn = document.querySelector('.show-more-btn');
+                            if (showMoreBtn) {
+                                showMoreBtn.textContent = 'Скрыть';
+                            }
+                        } else {
+                            hiddenCards.classList.remove('show');
+                            const showMoreBtn = document.querySelector('.show-more-btn');
+                            if (showMoreBtn) {
+                                showMoreBtn.textContent = 'Показать еще';
+                            }
+                        }
+                    }
+                }
+            },
+            mounted: function() {
+                const showMoreBtn = document.querySelector('.show-more-btn');
+                if (showMoreBtn) {
+                    showMoreBtn.addEventListener('click', this.toggleHidden);
                 }
             }
-        },
-        mounted: function() {
-            document.querySelector('.show-more-btn').addEventListener('click', this.toggleHidden);
-        }
-    });
+        });
+    }
 
     // Инициализация скрытия/показа шапки при скроле
     handleHeaderVisibility();
@@ -689,7 +716,7 @@ document.addEventListener('DOMContentLoaded', function() {
             
             const targetElement = document.querySelector(targetId);
             if (targetElement) {
-                const headerHeight = document.querySelector('.header').offsetHeight;
+                const headerHeight = document.querySelector('.header')?.offsetHeight || 0;
                 const targetPosition = targetElement.getBoundingClientRect().top + window.pageYOffset - headerHeight;
                 
                 window.scrollTo({
@@ -714,69 +741,119 @@ document.addEventListener('DOMContentLoaded', function() {
             const phone = formData.get('phone');
             
             // Пример отправки через EmailJS
-            emailjs.send('service_id', 'template_id', {
-                name: name,
-                phone: phone
-            })
-            .then(function() {
-                Swal.fire({
-                    title: 'Спасибо!',
-                    text: 'Мы перезвоним вам в ближайшее время',
-                    icon: 'success',
-                    customClass: {
-                        popup: 'swal-custom-popup',
-                        confirmButton: 'swal-custom-confirm'
+            if (typeof emailjs !== 'undefined') {
+                emailjs.send('service_id', 'template_id', {
+                    name: name,
+                    phone: phone
+                })
+                .then(function() {
+                    Swal.fire({
+                        title: 'Спасибо!',
+                        text: 'Мы перезвоним вам в ближайшее время',
+                        icon: 'success',
+                        customClass: {
+                            popup: 'swal-custom-popup',
+                            confirmButton: 'swal-custom-confirm'
+                        }
+                    });
+                    
+                    // Сброс формы
+                    form.reset();
+                    
+                    // Закрытие модального окна, если форма в модальном окне
+                    const modal = document.getElementById('callback-modal');
+                    if (modal && modal.classList.contains('active')) {
+                        modal.classList.remove('active');
                     }
+                })
+                .catch(function(error) {
+                    console.error('Ошибка отправки:', error);
+                    Swal.fire({
+                        title: 'Ошибка!',
+                        text: 'Не удалось отправить заявку. Пожалуйста, попробуйте позже.',
+                        icon: 'error',
+                        customClass: {
+                            popup: 'swal-custom-popup',
+                            confirmButton: 'swal-custom-confirm'
+                        }
+                    });
                 });
-                
-                // Сброс формы
-                form.reset();
-                
-                // Закрытие модального окна, если форма в модальном окне
-                const modal = document.getElementById('callback-modal');
-                if (modal && modal.classList.contains('active')) {
-                    modal.classList.remove('active');
-                }
-            })
-            .catch(function(error) {
-                console.error('Ошибка отправки:', error);
-                Swal.fire({
-                    title: 'Ошибка!',
-                    text: 'Не удалось отправить заявку. Пожалуйста, попробуйте позже.',
-                    icon: 'error',
-                    customClass: {
-                        popup: 'swal-custom-popup',
-                        confirmButton: 'swal-custom-confirm'
+            } else {
+                // Если EmailJS не доступен, используем обычный fetch
+                fetch('server.php', {
+                    method: 'POST',
+                    body: formData
+                })
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Ошибка отправки');
                     }
+                    return response.json();
+                })
+                .then(() => {
+                    Swal.fire({
+                        title: 'Спасибо!',
+                        text: 'Мы перезвоним вам в ближайшее время',
+                        icon: 'success',
+                        customClass: {
+                            popup: 'swal-custom-popup',
+                            confirmButton: 'swal-custom-confirm'
+                        }
+                    });
+                    
+                    // Сброс формы
+                    form.reset();
+                    
+                    // Закрытие модального окна, если форма в модальном окне
+                    const modal = document.getElementById('callback-modal');
+                    if (modal && modal.classList.contains('active')) {
+                        modal.classList.remove('active');
+                    }
+                })
+                .catch(error => {
+                    console.error('Ошибка отправки:', error);
+                    Swal.fire({
+                        title: 'Ошибка!',
+                        text: 'Не удалось отправить заявку. Пожалуйста, попробуйте позже.',
+                        icon: 'error',
+                        customClass: {
+                            popup: 'swal-custom-popup',
+                            confirmButton: 'swal-custom-confirm'
+                        }
+                    });
                 });
-            });
+            }
         });
     });
 
     // Открытие и закрытие модального окна
     const callbackButtons = document.querySelectorAll('.header-callback, a[href="#callback-modal"]');
     const modal = document.getElementById('callback-modal');
-    const closeButton = modal.querySelector('.modal-close');
-    
-    callbackButtons.forEach(button => {
-        button.addEventListener('click', function(e) {
-            e.preventDefault();
-            modal.classList.add('active');
-            document.body.style.overflow = 'hidden';
+    if (modal) {
+        const closeButton = modal.querySelector('.modal-close');
+        
+        callbackButtons.forEach(button => {
+            button.addEventListener('click', function(e) {
+                e.preventDefault();
+                modal.classList.add('active');
+                document.body.style.overflow = 'hidden';
+            });
         });
-    });
-    
-    closeButton.addEventListener('click', function() {
-        modal.classList.remove('active');
-        document.body.style.overflow = '';
-    });
-    
-    modal.addEventListener('click', function(e) {
-        if (e.target === modal) {
-            modal.classList.remove('active');
-            document.body.style.overflow = '';
+        
+        if (closeButton) {
+            closeButton.addEventListener('click', function() {
+                modal.classList.remove('active');
+                document.body.style.overflow = '';
+            });
         }
-    });
+        
+        modal.addEventListener('click', function(e) {
+            if (e.target === modal) {
+                modal.classList.remove('active');
+                document.body.style.overflow = '';
+            }
+        });
+    }
 });
 
 // Вертикальное перелистывание портфолио с эффектом sticky-карточек
@@ -790,7 +867,7 @@ document.addEventListener('DOMContentLoaded', function() {
         const portfolioCards = document.querySelectorAll('.portfolio-card');
         const portfolioGrid = document.querySelector('.portfolio-grid');
         
-        if (portfolioCards.length > 0) {
+        if (portfolioCards.length > 0 && portfolioSection && portfolioGrid) {
             // Настраиваем контейнер для sticky-эффекта
             portfolioSection.style.height = `${(portfolioCards.length * 60) + 100}vh`;
             portfolioGrid.style.height = '100%';
@@ -843,12 +920,15 @@ document.addEventListener('DOMContentLoaded', function() {
                                         duration: 0.5
                                     });
                                     // Анимируем контент карточки
-                                    gsap.to(c.querySelector('.portfolio-card-content'), {
-                                        opacity: 1,
-                                        y: 0,
-                                        duration: 0.5,
-                                        delay: 0.1
-                                    });
+                                    const cardContent = c.querySelector('.portfolio-card-content');
+                                    if (cardContent) {
+                                        gsap.to(cardContent, {
+                                            opacity: 1,
+                                            y: 0,
+                                            duration: 0.5,
+                                            delay: 0.1
+                                        });
+                                    }
                                 } else {
                                     gsap.to(c, {
                                         scale: 0.9, 
@@ -858,11 +938,14 @@ document.addEventListener('DOMContentLoaded', function() {
                                         duration: 0.5
                                     });
                                     // Скрываем контент неактивных карточек
-                                    gsap.to(c.querySelector('.portfolio-card-content'), {
-                                        opacity: 0,
-                                        y: 20,
-                                        duration: 0.3
-                                    });
+                                    const cardContent = c.querySelector('.portfolio-card-content');
+                                    if (cardContent) {
+                                        gsap.to(cardContent, {
+                                            opacity: 0,
+                                            y: 20,
+                                            duration: 0.3
+                                        });
+                                    }
                                 }
                             });
                         }
@@ -883,10 +966,13 @@ document.addEventListener('DOMContentLoaded', function() {
                 });
                 
                 // Устанавливаем начальное состояние для контента карточки
-                gsap.set(card.querySelector('.portfolio-card-content'), {
-                    opacity: index === 0 ? 1 : 0,
-                    y: index === 0 ? 0 : 20
-                });
+                const cardContent = card.querySelector('.portfolio-card-content');
+                if (cardContent) {
+                    gsap.set(cardContent, {
+                        opacity: index === 0 ? 1 : 0,
+                        y: index === 0 ? 0 : 20
+                    });
+                }
             });
             
             // Устанавливаем первую точку как активную
@@ -898,15 +984,58 @@ document.addEventListener('DOMContentLoaded', function() {
             // Добавляем обработчики клика на точки навигации
             navDots.forEach((dot, index) => {
                 dot.addEventListener('click', () => {
-                    const scrollPosition = portfolioSection.offsetTop + (index * (portfolioSection.offsetHeight / portfolioCards.length));
-                    window.scrollTo({
-                        top: scrollPosition,
-                        behavior: 'smooth'
-                    });
+                    if (portfolioSection) {
+                        const scrollPosition = portfolioSection.offsetTop + (index * (portfolioSection.offsetHeight / portfolioCards.length));
+                        window.scrollTo({
+                            top: scrollPosition,
+                            behavior: 'smooth'
+                        });
+                    }
                 });
             });
         }
     } else {
         console.warn('GSAP или ScrollTrigger не загружены');
+    }
+});
+
+// Анимация декоративных элементов при скролле
+document.addEventListener('DOMContentLoaded', function() {
+    const decor2 = document.querySelector('.why-us .decor2');
+    const whyUsSection = document.querySelector('.why-us');
+    
+    // Проверка наличия элементов перед добавлением обработчиков
+    if (decor2 && whyUsSection) {
+        let requestId;
+        let lastScrollTop = window.pageYOffset || document.documentElement.scrollTop;
+
+        window.addEventListener('scroll', function() {
+            if (requestId) {
+                cancelAnimationFrame(requestId);
+            }
+            
+            requestId = requestAnimationFrame(function() {
+                const rect = whyUsSection.getBoundingClientRect();
+                const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+                const scrollDirection = scrollTop > lastScrollTop ? 1 : -1;
+                
+                const viewportHeight = window.innerHeight;
+                const elementTop = rect.top;
+                const elementHeight = rect.height;
+                
+                const startOffset = viewportHeight * 0.5;
+                const totalDistance = viewportHeight + elementHeight;
+                
+                let progress = (startOffset - elementTop) / totalDistance;
+                progress = Math.min(Math.max(progress, 0), 1);
+                
+                const translateX = 600 * progress;
+                const inertiaFactor = 0.1;
+                const smoothTranslateX = translateX + (scrollDirection * inertiaFactor * Math.abs(scrollTop - lastScrollTop));
+                
+                decor2.style.setProperty('--tx', `${smoothTranslateX}px`);
+                lastScrollTop = scrollTop;
+            });
+        });
     }
 }); 

@@ -9,9 +9,7 @@
         <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
         <link rel="stylesheet" href="css/style.css">
         <script type="module">
-            import { supabase } from './js/supabase.js';
             import { handleCallbackForm } from './js/callback.js';
-            window.supabase = supabase;
             
             // Инициализация обработчика формы
             document.getElementById('callback-form').addEventListener('submit', handleCallbackForm);

@@ -1,5 +1,3 @@
-import { supabase } from './supabase.js';
-
 const questions = [
     {
         id: 1,
