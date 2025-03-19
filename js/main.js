@@ -783,74 +783,109 @@ document.addEventListener('DOMContentLoaded', function() {
 document.addEventListener('DOMContentLoaded', function() {
     // Проверяем, что GSAP и ScrollTrigger загружены
     if (typeof gsap !== 'undefined' && typeof ScrollTrigger !== 'undefined') {
-        
-        // Регистрируем плагин ScrollTrigger
         gsap.registerPlugin(ScrollTrigger);
         
+        // Базовые настройки анимации портфолио
         const portfolioSection = document.querySelector('.portfolio');
         const portfolioCards = document.querySelectorAll('.portfolio-card');
+        const portfolioGrid = document.querySelector('.portfolio-grid');
         
         if (portfolioCards.length > 0) {
-            // Создаем обертку для карточек для эффекта sticky
-            const portfolioWrapper = document.createElement('div');
-            portfolioWrapper.className = 'portfolio-wrapper';
-            const portfolioGrid = document.querySelector('.portfolio-grid');
+            // Настраиваем контейнер для sticky-эффекта
+            portfolioSection.style.height = `${(portfolioCards.length * 60) + 100}vh`;
+            portfolioGrid.style.height = '100%';
             
-            // Устанавливаем стиль обертки
-            portfolioGrid.style.height = 'auto';
-            
-            // Добавляем точки навигации
+            // Создаем навигационные точки
             const navigation = document.createElement('div');
             navigation.className = 'portfolio-navigation';
             portfolioSection.appendChild(navigation);
             
+            // Добавляем точки навигации для каждой карточки
             portfolioCards.forEach((card, index) => {
-                // Добавляем точки навигации
                 const dot = document.createElement('div');
                 dot.className = 'portfolio-nav-dot';
-                dot.addEventListener('click', () => {
-                    goToSection(index);
-                });
+                dot.dataset.index = index;
                 navigation.appendChild(dot);
-                
-                // Применяем sticky эффект к карточкам
+            });
+            
+            // Настраиваем ScrollTrigger для каждой карточки
+            portfolioCards.forEach((card, index) => {
                 gsap.to(card, {
-                    position: "sticky",
-                    ease: "power2.inOut",
-                    top: `${20 + index * 60}px`,
-                    padding: "20px 40px 40px",
                     scrollTrigger: {
-                        trigger: card,
-                        start: "top center",
-                        end: "bottom 300",
-                        scrub: true,
+                        trigger: portfolioSection,
+                        start: `top top`,
+                        end: `bottom bottom`,
+                        scrub: 1,
+                        pin: true,
+                        pinSpacing: false,
+                        markers: false,
+                        onUpdate: (self) => {
+                            // Обновляем активную точку в зависимости от позиции скролла
+                            const progress = self.progress * (portfolioCards.length);
+                            const activeIndex = Math.floor(progress);
+                            
+                            document.querySelectorAll('.portfolio-nav-dot').forEach((dot, i) => {
+                                if (i === activeIndex) {
+                                    dot.classList.add('active');
+                                } else {
+                                    dot.classList.remove('active');
+                                }
+                            });
+                            
+                            // Делаем активной только ту карточку, которая соответствует текущей позиции
+                            portfolioCards.forEach((c, i) => {
+                                if (i === activeIndex) {
+                                    gsap.to(c, {
+                                        scale: 1, 
+                                        opacity: 1, 
+                                        filter: 'blur(0px)',
+                                        zIndex: portfolioCards.length - i,
+                                        duration: 0.5
+                                    });
+                                    // Анимируем контент карточки
+                                    gsap.to(c.querySelector('.portfolio-card-content'), {
+                                        opacity: 1,
+                                        y: 0,
+                                        duration: 0.5,
+                                        delay: 0.1
+                                    });
+                                } else {
+                                    gsap.to(c, {
+                                        scale: 0.9, 
+                                        opacity: 0.5, 
+                                        filter: 'blur(5px)',
+                                        zIndex: 0,
+                                        duration: 0.5
+                                    });
+                                    // Скрываем контент неактивных карточек
+                                    gsap.to(c.querySelector('.portfolio-card-content'), {
+                                        opacity: 0,
+                                        y: 20,
+                                        duration: 0.3
+                                    });
+                                }
+                            });
+                        }
                     }
                 });
                 
-                // Анимируем заголовки и описания
-                gsap.from(card.querySelector('h3'), {
-                    opacity: 0,
-                    y: 50,
-                    duration: 0.5,
-                    scrollTrigger: {
-                        trigger: card,
-                        start: "top bottom",
-                        end: "top center",
-                        scrub: true
-                    }
+                // Устанавливаем начальное состояние для каждой карточки
+                gsap.set(card, {
+                    opacity: index === 0 ? 1 : 0.5,
+                    scale: index === 0 ? 1 : 0.9,
+                    zIndex: index === 0 ? portfolioCards.length : 0,
+                    filter: index === 0 ? 'blur(0px)' : 'blur(5px)',
+                    position: 'absolute',
+                    top: '50%',
+                    left: '50%',
+                    xPercent: -50,
+                    yPercent: -50
                 });
                 
-                gsap.from(card.querySelector('p'), {
-                    opacity: 0,
-                    y: 30,
-                    duration: 0.5,
-                    delay: 0.2,
-                    scrollTrigger: {
-                        trigger: card,
-                        start: "top bottom",
-                        end: "top center",
-                        scrub: true
-                    }
+                // Устанавливаем начальное состояние для контента карточки
+                gsap.set(card.querySelector('.portfolio-card-content'), {
+                    opacity: index === 0 ? 1 : 0,
+                    y: index === 0 ? 0 : 20
                 });
             });
             
@@ -860,33 +895,16 @@ document.addEventListener('DOMContentLoaded', function() {
                 navDots[0].classList.add('active');
             }
             
-            // Следим за прокруткой и обновляем активную точку
-            portfolioCards.forEach((card, index) => {
-                ScrollTrigger.create({
-                    trigger: card,
-                    start: "top center",
-                    end: "bottom center",
-                    onEnter: () => updateActiveNavDot(index),
-                    onEnterBack: () => updateActiveNavDot(index)
+            // Добавляем обработчики клика на точки навигации
+            navDots.forEach((dot, index) => {
+                dot.addEventListener('click', () => {
+                    const scrollPosition = portfolioSection.offsetTop + (index * (portfolioSection.offsetHeight / portfolioCards.length));
+                    window.scrollTo({
+                        top: scrollPosition,
+                        behavior: 'smooth'
+                    });
                 });
             });
-            
-            // Функция для обновления активной точки
-            function updateActiveNavDot(index) {
-                navDots.forEach(dot => dot.classList.remove('active'));
-                navDots[index].classList.add('active');
-            }
-            
-            // Функция для перехода к определенной секции
-            function goToSection(index) {
-                const card = portfolioCards[index];
-                const offsetTop = card.offsetTop - 20;
-                
-                window.scrollTo({
-                    top: offsetTop,
-                    behavior: 'smooth'
-                });
-            }
         }
     } else {
         console.warn('GSAP или ScrollTrigger не загружены');
